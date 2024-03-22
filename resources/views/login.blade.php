@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="flex min-h-screen flex-col items-center justify-center bg-secondary">
-            <div class="rounded-2xl bg-white p-3 text-primary px-12 pb-6">
+            <div class="rounded-2xl bg-white p-3 px-12 pb-6 text-primary">
                 {{-- Header --}}
                 <div class="flex w-full flex-col gap-5 py-4">
                     <div class="flex w-full justify-center gap-2">
@@ -21,19 +21,44 @@
                     <p class="text-center">Selamat datang, silahkan login terlebih dahulu!</p>
                 </div>
 
+                @if (Session::has('error'))
+                    <div class="bg-red-100 p-2 text-red-400 rounded-md border border-red-400 mb-2">
+                        <p>{{ Session::get('error') }}.</p>
+                    </div>
+                @endif
+
                 {{-- Form --}}
                 <div class="flex w-full flex-col gap-5">
-                    <form action="#" method="POST" class="flex flex-col gap-3">
+                    <form action="{{ route('login.perform') }}" method="POST" class="flex flex-col gap-3">
                         @csrf
                         <div class="flex flex-col gap-1">
                             <label for="username" class="text-sm">Username</label>
-                            <input type="text" name="username" id="username" class="rounded-md border border-gray-300 p-2 focus:border-primary focus:outline-none" placeholder="username" />
+                            <input
+                                type="text"
+                                name="username"
+                                id="username"
+                                class="rounded-md border border-gray-300 p-2 focus:border-primary focus:outline-none"
+                                placeholder="username"
+                                required
+                            />
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="password" class="text-sm">Password</label>
-                            <input type="password" name="password" id="password" class="rounded-md border border-gray-300 p-2 focus:border-primary focus:outline-none" placeholder="password"/>
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                class="rounded-md border border-gray-300 p-2 focus:border-primary focus:outline-none"
+                                placeholder="password"
+                                required
+                            />
                         </div>
-                        <button type="submit" class="bg-primary font-semibold text-white rounded-md p-2 hover:bg-secondary">Login</button>
+                        <button
+                            type="submit"
+                            class="rounded-md bg-primary p-2 font-semibold text-white hover:bg-secondary"
+                        >
+                            Login
+                        </button>
                     </form>
                 </div>
             </div>
