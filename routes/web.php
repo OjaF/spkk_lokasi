@@ -11,9 +11,26 @@ Route::post('/login', 'App\Http\Controllers\LoginController@login')->name('login
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::group(['middleware' => ['auth']], function () {
-        Route::get('dashboard', function () {
+
+        // Dashboard
+        Route::get('/dashboard', function () {
             return view('dashboard');
         })->name('dashboard');
+
+        // Routes untuk role marketing
+        Route::group(['middleware' => ['userRoles:marketing']], function () {
+            
+        });
+
+        // Routes untuk role marketing
+        Route::group(['middleware' => ['userRoles:finance']], function () {
+            
+        });
+
+        // Routes untuk role marketing
+        Route::group(['middleware' => ['userRoles:stakeholder']], function () {
+            
+        });
 
         /**
          * Logout Routes
