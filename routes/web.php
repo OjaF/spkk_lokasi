@@ -32,9 +32,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             
         });
 
-        /**
-         * Logout Routes
-         */
-        Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
+        // Ubah Password
+        Route::get('/change-password', 'ChangePasswordController@show')->name('change-password.show');
+
+        // Logout
+        Route::get('/logout', 'LogoutController@perform')->name('logout');
     });
 });

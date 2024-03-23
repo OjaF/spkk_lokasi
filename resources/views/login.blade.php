@@ -22,7 +22,7 @@
                 </div>
 
                 @if (Session::has('error'))
-                    <div class="bg-red-100 p-2 text-red-400 rounded-md border border-red-400 mb-2">
+                    <div class="mb-2 rounded-md border border-red-400 bg-red-100 p-2 text-red-400">
                         <p>{{ Session::get('error') }}.</p>
                     </div>
                 @endif
