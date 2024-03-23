@@ -51,7 +51,11 @@
                 {{-- Header --}}
                 <div class="flex w-full justify-end bg-secondary px-8">
                     <div class="flex-col">
-                        <button href="#" class="flex justify-end gap-2 p-3 hover:bg-primary min-w-32 w-auto" onclick="toogleDropdown()">
+                        <button
+                            href="#"
+                            class="flex w-auto min-w-32 justify-end gap-2 p-3 hover:bg-primary"
+                            onclick="toogleDropdown()"
+                        >
                             <p class="text-md font-thin text-white">{{ Auth::user()->name }}</p>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +75,7 @@
 
                         <div id="dropdownMenu" class="fixed hidden w-auto rounded-md border text-sm shadow-md">
                             <a
-                                href="{{ route('logout') }}"
+                                href="{{ route('change-password.show') }}"
                                 class="block rounded-md p-1 px-3 hover:bg-primary hover:text-white"
                             >
                                 <div class="flex gap-2">
@@ -124,6 +128,17 @@
                             dropdown.classList.toggle('hidden');
                         }
                     </script>
+                </div>
+
+                {{-- Content --}}
+                <div class="flex flex-col gap-4 p-4">
+                    <div class="py-2">
+                        @yield('content_title')
+                    </div>
+
+                    <div>
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>

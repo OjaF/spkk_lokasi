@@ -33,7 +33,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         // Ubah Password
-        Route::get('/change-password', 'ChangePasswordController@show')->name('change-password.show');
+        Route::get('/change-password', 'UserController@ubahPasswordPage')->name('change-password.show');
+        Route::post('/change-password/perform', 'UserController@ubahPassword')->name('change-password.perform');
 
         // Logout
         Route::get('/logout', 'LogoutController@perform')->name('logout');
