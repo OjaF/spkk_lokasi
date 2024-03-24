@@ -19,7 +19,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         // Routes untuk role marketing
         Route::group(['middleware' => ['userRoles:marketing']], function () {
-            
+            Route::get('/alternatif', function () {
+                return "Alternatif";
+            })->name('alternative.show');
         });
 
         // Routes untuk role marketing
