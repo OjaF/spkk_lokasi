@@ -80,8 +80,6 @@ class UserController extends Controller
 
         DB::beginTransaction();
         try {
-            throw new Exception("Error Processing Request", 1);
-            
             User::where("username", $validated["username"])->delete();
             DB::commit();
         } catch (\Throwable $th) {
