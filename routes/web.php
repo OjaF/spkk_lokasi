@@ -19,6 +19,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         // Routes untuk role marketing
         Route::group(['middleware' => ['userRoles:marketing']], function () {
+            Route::get('/user', 'UserController@userPage')->name('user.show');
+            Route::post('/user/delete', 'UserController@deleteUser')->name('user.delete');
+
             Route::get('/alternatif', function () {
                 return "Alternatif";
             })->name('alternative.show');
