@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UbahPasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -89,5 +90,31 @@ class UserController extends Controller
         }
 
         return redirect()->back()->with('success', 'User berhasil dihapus');
+    }
+
+    /**
+     * Menampilkan halaman tambah user
+     * @return \Illuminate\View\View
+     */
+    public function createUser(CreateUserRequest $request){
+        $validated = $request->validated();
+        
+        DB::beginTransaction();
+        try {
+            User::create([
+                'username'=> $validated['username'],
+                'name' => $validated['name'],
+                'password' => $validated['password'],
+                'role' => $validated['role'],
+            ]);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return redirect()->back()->with('error', 'Gagal menambahkan user');
+        }
+
+        return redirect()->back()->with('success', 'User berhasil ditambahkan');
     }
 }
