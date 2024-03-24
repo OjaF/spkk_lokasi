@@ -88,6 +88,6 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Gagal menghapus user');
         }
 
-        return redirect()->back()->with('message', 'User berhasil dihapus');
+        return redirect()->back()->with('success', 'User berhasil dihapus');
     }
 }

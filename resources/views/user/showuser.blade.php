@@ -26,29 +26,60 @@
         </div>
 
         @if (Session::has('error'))
-            <div class="rounded-md border border-red-200 bg-red-100 p-2 flex gap-2 justify-between text-red-400">
+            <div class="flex justify-between gap-2 rounded-md border border-red-200 bg-red-100 p-2 text-red-400">
                 <div class="flex gap-2">
                     <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="h-6 w-6 p-1"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                </svg>
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="h-6 w-6 p-1"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
+                    </svg>
 
-                <p class="font-medium ">{{ Session::get('error') }}</p>
+                    <p class="font-medium">{{ Session::get('error') }}</p>
                 </div>
 
-                {{-- <span class="">
+                {{--
+                    <span class="">
                     <svg class="fill-current h-6 w-6 text-red-400" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                </span> --}}
+                    </span>
+                --}}
+            </div>
+        @endif
+
+        @if (Session::has('success'))
+            <div class="flex justify-between gap-2 rounded-md border border-green-200 bg-green-100 p-2 text-green-400">
+                <div class="flex gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="h-6 w-6"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
+                    </svg>
+
+                    <p class="font-medium">{{ Session::get('success') }}</p>
+                </div>
+
+                {{--
+                    <span class="">
+                    <svg class="fill-current h-6 w-6 text-green-400" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                --}}
             </div>
         @endif
 
@@ -75,7 +106,10 @@
             <div class="flex flex-col gap-5 bg-white p-2">
                 <div class="flex w-full justify-between py-2">
                     <button
+                        data-modal-target="main-modal"
+                        data-modal-toggle="main-modal"
                         class="flex gap-1 rounded-md bg-secondary p-1 px-2 font-semibold text-white hover:bg-primary"
+                        type="button"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -138,10 +172,20 @@
                                     <td class="whitespace-nowrap px-6 py-2">{{ $item->username }}</td>
                                     <td class="whitespace-nowrap px-6 py-2">{{ $item->role }}</td>
                                     <td class="whitespace-nowrap px-6 py-2">
-                                        <form action="{{ route('user.delete') }}" method="post">
+                                        <form
+                                            id="delete-{{ $item->id }}"
+                                            action="{{ route('user.delete') }}"
+                                            method="post"
+                                        >
                                             @csrf
                                             <input type="text" name="username" value="{{ $item->username }}" hidden />
-                                            <button class="rounded-md bg-red-200 p-1 text-red-700" type="submit">
+                                            <button
+                                                data-modal-target="confirm-modal"
+                                                data-modal-toggle="confirm-modal"
+                                                class="rounded-md bg-red-200 p-1 text-red-700"
+                                                type="button"
+                                                onclick="setId({{ $item->id }})"
+                                            >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     fill="none"
@@ -169,4 +213,61 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('modal_content')
+    <div class="relative rounded-md bg-white p-2 shadow">haah</div>
+@endsection
+
+@section('confirm_modal_content')
+    <div class="relative w-fit rounded-md bg-white p-8 shadow">
+        <div class="flex flex-col justify-center gap-10">
+            <div class="flex w-full justify-center text-red-600">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-12 w-12"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+                    />
+                </svg>
+            </div>
+            <div class="flex w-full justify-center font-semibold">
+                <p>Apakah anda yakin ingin menghapus user ?</p>
+            </div>
+            <div class="flex justify-center gap-3">
+                <button
+                    class="w-full rounded-md bg-green-600 p-2 px-4 font-normal text-white hover:bg-green-700"
+                    onclick="confirm_yes()"
+                >
+                    Yakin
+                </button>
+                <button
+                    class="w-full rounded-md bg-red-600 p-2 px-4 font-normal text-white hover:bg-red-700"
+                    data-modal-target="confirm-modal"
+                    data-modal-toggle="confirm-modal"
+                >
+                    Tidak
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var id = '';
+
+        function setId(idBaru) {
+            id = idBaru;
+        }
+
+        function confirm_yes() {
+            const form = document.getElementById('delete-' + id);
+            form.submit();
+        }
+    </script>
 @endsection

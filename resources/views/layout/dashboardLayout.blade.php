@@ -7,7 +7,7 @@
         <title>SPK - @yield('title')</title>
 
         {{-- Tailwind --}}
-        @vite('resources/css/app.css')
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
         <div class="flex h-screen w-full">
@@ -357,5 +357,30 @@
                 </div>
             </div>
         </div>
+
+        <!-- Main modal -->
+        <div
+            id="main-modal"
+            tabindex="-1"
+            aria-hidden="true"
+            class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+        >
+            <div class="relative max-h-full w-full max-w-2xl p-4">
+                @yield('modal_content')
+            </div>
+        </div>
+
+        <!-- Main modal -->
+        <div
+            id="confirm-modal"
+            tabindex="-1"
+            aria-hidden="true"
+            class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+        >
+            <div class="relative max-h-full w-full max-w-xl p-4 flex justify-center">
+                @yield('confirm_modal_content')
+            </div>
+        </div>
+        <script src="js/flowbite.min.js"></script>
     </body>
 </html>
