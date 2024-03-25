@@ -4,7 +4,7 @@
     Kelola User
 @endsection
 
-@section('content_title')
+@section('content')
     <div class="flex flex-col gap-5">
         {{-- Header --}}
         <div class="flex gap-2">
@@ -161,7 +161,7 @@
                     <table class="text-surface min-w-full text-start text-sm font-light">
                         <thead class="border-b border-neutral-200 bg-primary font-medium text-white">
                             <tr>
-                                <th scope="col" class="px-6 py-2">Name</th>
+                                <th scope="col" class="px-6 py-2">Nama</th>
                                 <th scope="col" class="px-6 py-2">Username</th>
                                 <th scope="col" class="px-6 py-2">Role</th>
                                 <th scope="col" class="px-6 py-2">Action</th>
@@ -183,8 +183,8 @@
                                             <input type="text" name="username" value="{{ $item->username }}" hidden />
                                             @if (Auth::user()->id != $item->id)
                                                 <button
-                                                    data-modal-target="confirm-modal"
-                                                    data-modal-toggle="confirm-modal"
+                                                    data-modal-target="confirm-modal-1"
+                                                    data-modal-toggle="confirm-modal-1"
                                                     class="rounded-md bg-red-200 p-1 text-red-700"
                                                     type="button"
                                                     onclick="setId({{ $item->id }})"
@@ -317,7 +317,7 @@
     </div>
 @endsection
 
-@section('confirm_modal_content')
+@section('confirm_modal_content-1')
     <div class="relative w-fit rounded-md bg-white p-8 shadow">
         <div class="flex flex-col justify-center gap-10">
             <div class="flex w-full justify-center text-red-600">
@@ -348,8 +348,8 @@
                 </button>
                 <button
                     class="w-full rounded-md bg-red-600 p-2 px-4 font-normal text-white hover:bg-red-700"
-                    data-modal-target="confirm-modal"
-                    data-modal-toggle="confirm-modal"
+                    data-modal-target="confirm-modal-1"
+                    data-modal-toggle="confirm-modal-1"
                 >
                     Tidak
                 </button>

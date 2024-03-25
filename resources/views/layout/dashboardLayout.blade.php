@@ -70,7 +70,7 @@
                         </li>
                         <li>
                             <a
-                                href="{{ route('dashboard') }}"
+                                href="{{ route('kriteria.show') }}"
                                 class="relative flex h-11 flex-row items-center border-l-4 border-transparent pr-6 text-white hover:border-blue-400 hover:bg-gray-50 hover:text-gray-800 focus:outline-none"
                             >
                                 <span class="ml-4 inline-flex items-center justify-center">
@@ -348,10 +348,6 @@
                 {{-- Content --}}
                 <div class="flex flex-col gap-4 p-4">
                     <div class="py-2">
-                        @yield('content_title')
-                    </div>
-
-                    <div>
                         @yield('content')
                     </div>
                 </div>
@@ -370,15 +366,27 @@
             </div>
         </div>
 
-        <!-- Main modal -->
+        <!-- Confirm modal -->
         <div
-            id="confirm-modal"
+            id="confirm-modal-1"
             tabindex="-1"
             aria-hidden="true"
             class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
         >
             <div class="relative flex max-h-full w-full max-w-xl justify-center p-4">
-                @yield('confirm_modal_content')
+                @yield('confirm_modal_content-1')
+            </div>
+        </div>
+
+        <!-- Confirm modal -->
+        <div
+            id="confirm-modal-2"
+            tabindex="-1"
+            aria-hidden="true"
+            class="fixed left-0 right-0 top-0 z-50 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+        >
+            <div class="relative flex max-h-full w-full max-w-xl justify-center p-4">
+                @yield('confirm_modal_content-1')
             </div>
         </div>
         <script src="js/flowbite.min.js"></script>

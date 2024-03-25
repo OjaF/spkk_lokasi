@@ -94,7 +94,7 @@ class UserController extends Controller
 
     /**
      * Menampilkan halaman tambah user
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function createUser(CreateUserRequest $request){
         $validated = $request->validated();
@@ -112,7 +112,7 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
 
-            return redirect()->back()->with('error', 'Gagal menambahkan user');
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan, User gagal ditambahkan']);
         }
 
         return redirect()->back()->with('success', 'User berhasil ditambahkan');
