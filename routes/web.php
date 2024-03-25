@@ -17,6 +17,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('dashboard');
         })->name('dashboard');
 
+        // Routes untuk kriteria
+        Route::get('/kriteria', 'KriteriaController@kriteriaPage')->name('kriteria.show');
+        Route::post('/kriteria/create', 'KriteriaController@createKriteria')->name('kriteria.create');
+        Route::post('/kriteria/delete', 'KriteriaController@deleteKriteria')->name('kriteria.delete');
+
         // Routes untuk role marketing
         Route::group(['middleware' => ['userRoles:marketing']], function () {
             Route::get('/user', 'UserController@userPage')->name('user.show');
@@ -28,12 +33,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             })->name('alternative.show');
         });
 
-        // Routes untuk role marketing
+        // Routes untuk role finance
         Route::group(['middleware' => ['userRoles:finance']], function () {
             
         });
 
-        // Routes untuk role marketing
+        // Routes untuk role stakeholder
         Route::group(['middleware' => ['userRoles:stakeholder']], function () {
             
         });
