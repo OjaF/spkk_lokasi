@@ -82,4 +82,38 @@ class KriteriaController extends Controller
 
         return redirect()->back()->with('success', 'Kriteria berhasil dihapus');
     }
+
+    /**
+     * Mengubah kriteria
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateKriteria(Request $request){
+        $validated = $request->validate([
+            'id' => 'required|exists:kriterias,id',
+            'nama' => 'required',
+            'bobot' => 'required',
+        ]);
+
+        $kriteria = Kriteria::find($validated['id']);
+
+        if ($kriteria == null) {
+            return redirect()->back()->withErrors(['error' => 'Kriteria tidak ditemukan']);
+        }
+
+        DB::beginTransaction();
+        try {
+            $kriteria->update([
+                'nama_kriteria' => $validated['nama'],
+                'bobot' => $validated['bobot'],
+            ]);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            Db::rollback();
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan, Kriteria gagal diubah']);
+        }
+
+        return redirect()->back()->with('success', 'Kriteria berhasil diubah');
+    }
 }

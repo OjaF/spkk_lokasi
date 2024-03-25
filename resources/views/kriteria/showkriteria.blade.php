@@ -119,12 +119,12 @@
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            class="h-6 w-6 p-1"
+                            class="h-6 w-6"
                         >
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z"
+                                d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
                             />
                         </svg>
 
@@ -173,15 +173,16 @@
                                         {{ $item->nama_kriteria }}
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-2 font-semibold">{{ $item->bobot }}</td>
-                                    <td class="whitespace-nowrap px-6 py-2 flex gap-2">
+                                    <td class="flex gap-2 whitespace-nowrap px-6 py-2">
                                         {{-- Edit --}}
                                         <form id="edit-{{ $item->id }}" action="#" method="post">
                                             @csrf
                                             <button
-                                                data-modal-target="confirm-modal-2"
-                                                data-modal-toggle="confirm-modal-2"
+                                                data-modal-target="secondary-modal"
+                                                data-modal-toggle="secondary-modal"
                                                 class="rounded-md bg-yellow-200 p-1 text-yellow-700"
                                                 type="button"
+                                                onclick="setEditData('{{ $item->nama_kriteria }}', '{{ $item->bobot }}', '{{ $item->id }}')"
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -326,12 +327,12 @@
         <div class="flex flex-col gap-2">
             {{-- Header --}}
             <div class="flex justify-between border-b border-primary py-1 text-xl font-semibold">
-                <p>Data Kriteria Baru</p>
+                <p>Ubah Data Kriteria</p>
                 <button
                     class="rounded-md bg-gray-100 hover:bg-gray-200"
                     type="button"
-                    data-modal-target="main-modal"
-                    data-modal-toggle="main-modal"
+                    data-modal-target="secondary-modal"
+                    data-modal-toggle="secondary-modal"
                 >
                     <span class="px-2 font-thin">X</span>
                 </button>
@@ -339,9 +340,10 @@
 
             {{-- Content --}}
             <div>
-                <form action="{{ route('kriteria.create') }}" method="post" autocomplete="off">
+                <form action="{{ route('kriteria.update') }}" method="post" autocomplete="off">
                     @csrf
                     <input autocomplete="false" name="hidden" type="text" style="display: none" />
+                    <input id="edit_id_kriteria" type="text" name="id" hidden />
 
                     <div class="flex flex-col gap-2 p-2">
                         <div class="flex flex-col gap-1">
@@ -349,7 +351,7 @@
                             <input
                                 type="text"
                                 name="nama"
-                                id="nama"
+                                id="edit_nama_kriteria"
                                 class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
                                 placeholder="Nama Kriteria"
                                 required
@@ -365,7 +367,7 @@
                                 max="1"
                                 step="0.01"
                                 name="bobot"
-                                id="bobot"
+                                id="edit_bobot_kriteria"
                                 class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
                                 placeholder="Bobot"
                                 required
@@ -384,8 +386,8 @@
                             <button
                                 class="rounded-md bg-red-600 p-2 font-semibold text-white hover:bg-red-700"
                                 type="reset"
-                                data-modal-target="main-modal"
-                                data-modal-toggle="main-modal"
+                                data-modal-target="secondary-modal"
+                                data-modal-toggle="secondary-modal"
                             >
                                 <p>Cancel</p>
                             </button>
@@ -395,6 +397,16 @@
             </div>
         </div>
     </div>
+    <script>
+        function setEditData(nama, bobot, idKriteria) {
+            const editNamaKriteria = document.getElementById('edit_nama_kriteria');
+            const editBobotKriteria = document.getElementById('edit_bobot_kriteria');
+            const editIdKriteria = document.getElementById('edit_id_kriteria');
+            editNamaKriteria.value = nama;
+            editBobotKriteria.value = bobot;
+            editIdKriteria.value = idKriteria;
+        }
+    </script>
 @endsection
 
 {{-- Modal hapus kriteria --}}

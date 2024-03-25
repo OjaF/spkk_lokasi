@@ -21,6 +21,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/kriteria', 'KriteriaController@kriteriaPage')->name('kriteria.show');
         Route::post('/kriteria/create', 'KriteriaController@createKriteria')->name('kriteria.create');
         Route::post('/kriteria/delete', 'KriteriaController@deleteKriteria')->name('kriteria.delete');
+        Route::post('/kriteria/update', 'KriteriaController@updateKriteria')->name('kriteria.update');
 
         // Routes untuk role marketing
         Route::group(['middleware' => ['userRoles:marketing']], function () {
