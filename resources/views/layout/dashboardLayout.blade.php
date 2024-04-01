@@ -12,7 +12,7 @@
     <body>
         <div class="flex h-screen w-full">
             {{-- Sidebar --}}
-            <div class="flex h-full w-full max-w-52 flex-col justify-between bg-secondary text-white shadow-md">
+            <div class="flex h-screen w-full max-w-52 flex-col justify-between bg-secondary text-white shadow-md">
                 {{-- Header --}}
                 <div class="flex justify-center bg-primary p-3">
                     <div class="flex gap-2">
@@ -94,7 +94,7 @@
                         </li>
                         <li>
                             <a
-                                href="{{ route('dashboard') }}"
+                                href="{{ route('subkriteria.show') }}"
                                 class="relative flex h-11 flex-row items-center border-l-4 border-transparent pr-6 text-white hover:border-blue-400 hover:bg-gray-50 hover:text-gray-800 focus:outline-none"
                             >
                                 <span class="ml-4 inline-flex items-center justify-center">
@@ -346,7 +346,7 @@
                 </div>
 
                 {{-- Content --}}
-                <div class="flex flex-col gap-4 p-4">
+                <div class="flex flex-col gap-4 p-4 overflow-scroll no-scrollbar">
                     <div class="py-2">
                         @yield('content')
                     </div>

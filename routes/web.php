@@ -23,6 +23,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/kriteria/delete', 'KriteriaController@deleteKriteria')->name('kriteria.delete');
         Route::post('/kriteria/update', 'KriteriaController@updateKriteria')->name('kriteria.update');
 
+        // Routes untuk subkriteria
+        Route::get('/subkriteria', 'SubKriteriaController@subkriteriaPage')->name('subkriteria.show');
+        Route::post('/subkriteria/add', 'SubKriteriaController@addSubkriteria')->name('subkriteria.add');
+        Route::post('/subkriteria/delete', 'SubKriteriaController@deleteSubkriteria')->name('subkriteria.delete');
+        Route::post('/subkriteria/update', 'SubKriteriaController@updateSubkriteria')->name('subkriteria.update');
+
         // Routes untuk role marketing
         Route::group(['middleware' => ['userRoles:marketing']], function () {
             Route::get('/user', 'UserController@userPage')->name('user.show');
@@ -30,7 +36,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::post('/user/create','UserController@createUser')->name('user.create');
 
             Route::get('/alternatif', function () {
-                return "Alternatif";
+                return view('alternatif.showalternatif');
             })->name('alternative.show');
         });
 

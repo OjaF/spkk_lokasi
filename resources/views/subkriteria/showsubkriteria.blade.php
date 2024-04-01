@@ -1,7 +1,7 @@
 @extends('layout.dashboardLayout')
 
 @section('title')
-    Kriteria
+    Sub-Kriteria
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
                     d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
                 />
             </svg>
-            <h1 class="text-2xl font-semibold">Data Kriteria</h1>
+            <h1 class="text-2xl font-semibold">Data Sub-Kriteria</h1>
         </div>
 
         @if ($errors->any())
@@ -85,60 +85,33 @@
             </div>
         @endif
 
-        {{-- Content --}}
-        <div class="flex flex-col rounded-md border bg-secondary">
-            <div class="flex gap-2 p-2 text-white">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="white"
-                    class="h-6 w-6"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                    />
-                </svg>
-                <p class="font-semibold">Data Kriteria</p>
-            </div>
-
-            <div class="flex flex-col gap-5 bg-white p-2">
-                <div class="flex w-full justify-between py-2">
-                    <button
-                        data-modal-target="main-modal"
-                        data-modal-toggle="main-modal"
-                        class="flex gap-1 rounded-md bg-secondary p-1 px-2 font-semibold text-white hover:bg-primary"
-                        type="button"
-                    >
+        @foreach ($dataKriteria as $kriteria)
+            <div class="flex flex-col rounded-md border bg-secondary">
+                <div class="flex gap-2 justify-between p-2 text-white">
+                    <div class="flex gap-2 p-1">
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="h-6 w-6"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
-                            />
-                        </svg>
-
-                        <p>Tambah Kriteria</p>
-                    </button>
-
-                    <form action="{{ route('kriteria.show') }}" method="GET" class="flex justify-end">
-                        <input
-                            type="text"
-                            name="search_query"
-                            class="placeholder:text-md rounded-md rounded-r-none border border-primary border-r-transparent p-1 placeholder:font-thin"
-                            placeholder="Search"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="white"
+                        class="h-6 w-6"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
                         />
-                        <button type="submit" class="rounded-r-md bg-secondary p-1 text-white hover:bg-primary">
+                    </svg>
+                    <p class="font-semibold capitalize">{{ $kriteria->nama_kriteria }}</p>
+                    </div>
+                    <button
+                            data-modal-target="main-modal"
+                            data-modal-toggle="main-modal"
+                            class="flex gap-1 rounded-md bg-white p-1 px-2 font-semibold text-primary hover:text-white hover:bg-primary"
+                            type="button"
+                            onclick="setKriteria({{ $kriteria->id }})"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -150,107 +123,109 @@
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                                    d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
                                 />
                             </svg>
+    
+                            <p>Tambah Sub-Kriteria</p>
                         </button>
-                    </form>
                 </div>
-
-                <div class="flex flex-col gap-5">
-                    <table class="text-surface min-w-full text-start text-sm font-light">
-                        <thead class="border-b border-neutral-200 bg-secondary font-medium text-white">
-                            <tr>
-                                <th scope="col" class="px-6 py-2">Nama Kriteria</th>
-                                <th scope="col" class="px-6 py-2">Bobot</th>
-                                <th scope="col" class="px-6 py-2">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($dataKriteria as $item)
-                                <tr class="border-b border-neutral-200 hover:bg-primary/10">
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold">
-                                        {{ $item->nama_kriteria }}
-                                    </td>
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold">{{ $item->bobot }}</td>
-                                    <td class="flex gap-2 whitespace-nowrap px-6 py-2">
-                                        {{-- Edit --}}
-                                        <form id="edit-{{ $item->id }}" action="#" method="post">
-                                            @csrf
-                                            <button
-                                                data-modal-target="secondary-modal"
-                                                data-modal-toggle="secondary-modal"
-                                                class="rounded-md bg-yellow-200 p-1 text-yellow-700"
-                                                type="button"
-                                                onclick="setEditData('{{ $item->nama_kriteria }}', '{{ $item->bobot }}', '{{ $item->id }}')"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    stroke="currentColor"
-                                                    class="h-6 w-6"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </form>
-
-                                        {{-- Delete --}}
-                                        <form
-                                            id="delete-{{ $item->id }}"
-                                            action="{{ route('kriteria.delete') }}"
-                                            method="post"
-                                        >
-                                            @csrf
-                                            <input type="text" name="id" value="{{ $item->id }}" hidden />
-
-                                            <button
-                                                data-modal-target="confirm-modal-1"
-                                                data-modal-toggle="confirm-modal-1"
-                                                class="rounded-md bg-red-200 p-1 text-red-700"
-                                                type="button"
-                                                onclick="setId({{ $item->id }})"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    stroke="currentColor"
-                                                    class="h-6 w-6"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    </td>
+                <div class="flex flex-col gap-5 bg-white p-2">
+                    <div class="flex flex-col gap-5">
+                        <table class="text-surface min-w-full text-start text-sm font-light">
+                            <thead class="border-b border-neutral-200 bg-secondary font-medium text-white">
+                                <tr>
+                                    <th scope="col" class="px-6 py-2">Nama Sub-Kriteria</th>
+                                    <th scope="col" class="px-6 py-2">Nilai</th>
+                                    <th scope="col" class="px-6 py-2">Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($kriteria->subkriteria as $item)
+                                    <tr class="border-b border-neutral-200 hover:bg-primary/10">
+                                        <td class="whitespace-nowrap px-6 py-2 font-semibold">
+                                            {{ $item->nama_subkriteria }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-6 py-2 text-center font-semibold">{{ $item->nilai }}</td>
+                                        <td class="flex gap-2 justify-end whitespace-nowrap px-6 py-2">
+                                            {{-- Edit --}}
+                                            <form id="edit-{{ $item->id }}" action="{{ route('subkriteria.update') }}" method="post">
+                                                @csrf
+                                                <button
+                                                    data-modal-target="secondary-modal"
+                                                    data-modal-toggle="secondary-modal"
+                                                    class="rounded-md bg-yellow-200 p-1 text-yellow-700"
+                                                    type="button"
+                                                    onclick="setEditData('{{ $item->nama_subkriteria }}', '{{ $item->nilai }}', '{{ $item->id }}')"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke-width="1.5"
+                                                        stroke="currentColor"
+                                                        class="h-6 w-6"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                            </form>
+    
+                                            {{-- Delete --}}
+                                            <form
+                                                id="delete-{{ $item->id }}"
+                                                action="{{ route('subkriteria.delete') }}"
+                                                method="post"
+                                            >
+                                                @csrf
+                                                <input type="text" name="id" value="{{ $item->id }}" hidden />
+    
+                                                <button
+                                                    data-modal-target="confirm-modal-1"
+                                                    data-modal-toggle="confirm-modal-1"
+                                                    class="rounded-md bg-red-200 p-1 text-red-700"
+                                                    type="button"
+                                                    onclick="setId({{ $item->id }})"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke-width="1.5"
+                                                        stroke="currentColor"
+                                                        class="h-6 w-6"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 
-{{-- Modal Tambah Kriteria --}}
+{{-- Modal Tambah Sub-Kriteria --}}
 @section('modal_content')
     <div class="relative rounded-md bg-white p-2 shadow">
         <div class="flex flex-col gap-2">
             {{-- Header --}}
             <div class="flex justify-between border-b border-primary py-1 text-xl font-semibold">
-                <p>Data Kriteria Baru</p>
+                <p>Data Sub-Kriteria Baru</p>
                 <button
                     class="rounded-md bg-gray-100 hover:bg-gray-200"
                     type="button"
@@ -263,35 +238,32 @@
 
             {{-- Content --}}
             <div>
-                <form action="{{ route('kriteria.create') }}" method="post" autocomplete="off">
+                <form action="{{ route('subkriteria.add') }}" method="post" autocomplete="off">
                     @csrf
-                    <input autocomplete="false" name="hidden" type="text" style="display: none" />
+                    <input id="add-kriteria" type="text" name="kriteria" hidden>
 
                     <div class="flex flex-col gap-2 p-2">
                         <div class="flex flex-col gap-1">
-                            <label for="name" class="font-semibold">Nama Kriteria</label>
+                            <label for="name" class="font-semibold">Nama Sub-Kriteria</label>
                             <input
                                 type="text"
                                 name="nama"
                                 id="nama"
                                 class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
-                                placeholder="Nama Kriteria"
+                                placeholder="Nama Sub-Kriteria"
                                 required
                             />
                         </div>
 
                         <div class="flex flex-col gap-1">
-                            <label for="username" class="font-semibold">Bobot</label>
+                            <label for="username" class="font-semibold">Nilai</label>
                             <input
                                 autocomplete="off"
                                 type="number"
-                                min="0"
-                                max="1"
-                                step="0.01"
-                                name="bobot"
-                                id="bobot"
+                                name="nilai"
+                                id="nilai"
                                 class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
-                                placeholder="Bobot"
+                                placeholder="Nilai"
                                 required
                             />
                         </div>
@@ -316,6 +288,12 @@
                         </div>
                     </div>
                 </form>
+                <script>
+                    function setKriteria(idKriteria) {
+                        const addKriteria = document.getElementById('add-kriteria');
+                        addKriteria.value = idKriteria;
+                    }
+                </script>
             </div>
         </div>
     </div>
@@ -340,20 +318,20 @@
 
             {{-- Content --}}
             <div>
-                <form action="{{ route('kriteria.update') }}" method="post" autocomplete="off">
+                <form action="{{ route('subkriteria.update') }}" method="post" autocomplete="off">
                     @csrf
                     <input autocomplete="false" name="hidden" type="text" style="display: none" />
                     <input id="edit_id_kriteria" type="text" name="id" hidden />
 
                     <div class="flex flex-col gap-2 p-2">
                         <div class="flex flex-col gap-1">
-                            <label for="name" class="font-semibold">Nama Kriteria</label>
+                            <label for="name" class="font-semibold">Nama Sub-Kriteria</label>
                             <input
                                 type="text"
                                 name="nama"
                                 id="edit_nama_kriteria"
                                 class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
-                                placeholder="Nama Kriteria"
+                                placeholder="Nama Sub-Kriteria"
                                 required
                             />
                         </div>
@@ -363,13 +341,10 @@
                             <input
                                 autocomplete="off"
                                 type="number"
-                                min="0"
-                                max="1"
-                                step="0.01"
-                                name="bobot"
+                                name="nilai"
                                 id="edit_bobot_kriteria"
                                 class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
-                                placeholder="Bobot"
+                                placeholder="Nilai"
                                 required
                             />
                         </div>
@@ -430,7 +405,7 @@
                 </svg>
             </div>
             <div class="flex w-full justify-center font-semibold">
-                <p>Apakah anda yakin ingin menghapus kriteria ?</p>
+                <p>Apakah anda yakin ingin menghapus Sub-kriteria ?</p>
             </div>
             <div class="flex justify-center gap-3">
                 <button
@@ -462,3 +437,4 @@
         }
     </script>
 @endsection
+
