@@ -24,3 +24,12 @@ Untuk melakukan instalasi project secara manual dapat dengan langkah berikut
 - ```copy .env.example .env``` (Untuk Windows) atau ```cp .env.example .env``` (Untuk Linux dan MAC)
 - ```php artisan key:generate```
 - ```php artisan migrate```
+
+## Menjalankan Aplikasi
+
+### Otomatis
+- Jalankan program ```START.bat```
+
+### Manual 
+- Jalankan perintah ```php artisan serve``` pada cmd
+- Buka ```http://localhost:8000/``` pada browser
