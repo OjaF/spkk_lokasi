@@ -178,6 +178,7 @@
                                             id="delete-{{ $item->id }}"
                                             action="{{ route('user.delete') }}"
                                             method="post"
+                                            class="flex gap-2 justify-center"
                                         >
                                             @csrf
                                             <input type="text" name="username" value="{{ $item->username }}" hidden />
