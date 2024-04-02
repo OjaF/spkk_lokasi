@@ -35,9 +35,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::post('/user/delete', 'UserController@deleteUser')->name('user.delete');
             Route::post('/user/create','UserController@createUser')->name('user.create');
 
-            Route::get('/alternatif', function () {
-                return view('alternatif.showalternatif');
-            })->name('alternative.show');
+            // Routes untuk alternatif
+            Route::get('/alternatif', 'AlternatifController@alternatifPage')->name('alternative.show');
+            Route::post('/alternatif/add', 'AlternatifController@addAlternatif')->name('alternative.add');
+            Route::post('/alternatif/delete', 'AlternatifController@deleteAlternatif')->name('alternative.delete');
+            Route::post('/alternatif/update', 'AlternatifController@updateAlternatif')->name('alternative.update');
         });
 
         // Routes untuk role finance

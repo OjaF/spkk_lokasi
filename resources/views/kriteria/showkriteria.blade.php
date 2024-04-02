@@ -173,7 +173,7 @@
                                         {{ $item->nama_kriteria }}
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-2 font-semibold">{{ $item->bobot }}</td>
-                                    <td class="flex gap-2 whitespace-nowrap px-6 py-2">
+                                    <td class="flex gap-2 whitespace-nowrap px-6 py-2 justify-end">
                                         {{-- Edit --}}
                                         <form id="edit-{{ $item->id }}" action="#" method="post">
                                             @csrf
