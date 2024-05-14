@@ -23,6 +23,8 @@ class CreateAlternatifRequest extends FormRequest
     {
         return [
             'nama_alternatif' => 'required|string',
+            'keterangan' => 'string|nullable',
+            'kode' => 'required|string'
         ];
     }
 }

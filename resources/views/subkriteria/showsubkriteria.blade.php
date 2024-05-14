@@ -143,10 +143,10 @@
                             <tbody>
                                 @foreach ($kriteria->subkriteria as $item)
                                     <tr class="border-b border-neutral-200 hover:bg-primary/10">
-                                        <td class="whitespace-nowrap px-6 py-2 font-semibold">
+                                        <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">
                                             {{ $item->nama_subkriteria }}
                                         </td>
-                                        <td class="whitespace-nowrap px-6 py-2 text-center font-semibold">{{ $item->nilai }}</td>
+                                        <td class="whitespace-nowrap px-6 py-2 text-center font-semibold border-r">{{ $item->nilai }}</td>
                                         <td class="flex gap-2 justify-end whitespace-nowrap px-6 py-2">
                                             {{-- Edit --}}
                                             <form id="edit-{{ $item->id }}" action="{{ route('subkriteria.update') }}" method="post">

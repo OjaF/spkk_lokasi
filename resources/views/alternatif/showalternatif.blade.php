@@ -161,14 +161,18 @@
                     <table class="text-surface min-w-full text-start text-sm font-light">
                         <thead class="border-b border-neutral-200 bg-secondary font-medium text-white">
                             <tr>
+                                <th scope="col" class="px-6 py-2">Kode Alternatif</th>
                                 <th scope="col" class="px-6 py-2">Nama Alternatif</th>
+                                <th scope="col" class="px-6 py-2">Keterangan</th>
                                 <th scope="col" class="px-6 py-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($dataAlternatif as $item)
                                 <tr class="border-b border-neutral-200 hover:bg-primary/10">
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold">{{ $item->nama_alternatif }}</td>
+                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->kode }}</td>
+                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->nama_alternatif }}</td>
+                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->keterangan }}</td>
                                     <td class="flex gap-2 whitespace-nowrap px-6 py-2 justify-end">
                                         {{-- Edit --}}
                                         <form id="edit-{{ $item->id }}" action="#" method="post">
@@ -178,7 +182,7 @@
                                                 data-modal-toggle="secondary-modal"
                                                 class="rounded-md bg-yellow-200 p-1 text-yellow-700"
                                                 type="button"
-                                                onclick="setEditData('{{ $item->nama_alternatif }}', '{{ $item->id }}')"
+                                                onclick="setEditData('{{ $item->nama_alternatif }}', '{{ $item->id }}', '{{ $item->kode }}', '{{ $item->keterangan }}')"
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -246,7 +250,7 @@
         <div class="flex flex-col gap-2">
             {{-- Header --}}
             <div class="flex justify-between border-b border-primary py-1 text-xl font-semibold">
-                <p>Data Kriteria Baru</p>
+                <p>Data Alternatif Baru</p>
                 <button
                     class="rounded-md bg-gray-100 hover:bg-gray-200"
                     type="button"
@@ -265,6 +269,18 @@
 
                     <div class="flex flex-col gap-2 p-2">
                         <div class="flex flex-col gap-1">
+                            <label for="name" class="font-semibold">Kode Alternatif</label>
+                            <input
+                                type="text"
+                                name="kode"
+                                id="kode"
+                                class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
+                                placeholder="Nama Alternatif"
+                                required
+                            />
+                        </div>
+
+                        <div class="flex flex-col gap-1">
                             <label for="name" class="font-semibold">Nama Alternatif</label>
                             <input
                                 type="text"
@@ -274,6 +290,11 @@
                                 placeholder="Nama Alternatif"
                                 required
                             />
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="name" class="font-semibold">Keterangan</label>
+                            <Textarea name="keterangan" id="keterangan" class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin" placeholder="Keterangan"></Textarea>
                         </div>
 
                         <input type="text" name="role" value="{{ Auth::user()->role }}" hidden />
@@ -327,6 +348,18 @@
 
                     <div class="flex flex-col gap-2 p-2">
                         <div class="flex flex-col gap-1">
+                            <label for="name" class="font-semibold">Kode Alternatif</label>
+                            <input
+                                type="text"
+                                name="kode"
+                                id="edit_kode"
+                                class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
+                                placeholder="Nama Alternatif"
+                                required
+                            />
+                        </div>
+
+                        <div class="flex flex-col gap-1">
                             <label for="name" class="font-semibold">Nama Kriteria</label>
                             <input
                                 type="text"
@@ -336,6 +369,11 @@
                                 placeholder="Nama Kriteria"
                                 required
                             />
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="name" class="font-semibold">Keterangan</label>
+                            <Textarea name="keterangan" id="edit_keterangan" class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin" placeholder="Keterangan"></Textarea>
                         </div>
 
                         <input type="text" name="role" value="{{ Auth::user()->role }}" hidden />
@@ -362,11 +400,15 @@
         </div>
     </div>
     <script>
-        function setEditData(nama, idAlternatif) {
+        function setEditData(nama, idAlternatif, kode, keterangan) {
             const editNamaAlternatif = document.getElementById('edit_nama_alternatif');
             const editIdAlternatif = document.getElementById('edit_id_alternatif');
+            const editKode = document.getElementById('edit_kode');
+            const editKeterangan = document.getElementById('edit_keterangan');
             editNamaAlternatif.value = nama;
             editIdAlternatif.value = idAlternatif;
+            editKode.value = kode;
+            editKeterangan.value = keterangan;
         }
     </script>
 @endsection

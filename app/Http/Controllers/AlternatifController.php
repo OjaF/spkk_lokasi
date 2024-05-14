@@ -36,10 +36,13 @@ class AlternatifController extends Controller
         DB::beginTransaction();
         try {
             Alternatif::create([
-                'nama_alternatif' => $validated['nama_alternatif']
+                'kode' => $validated['kode'],
+                'nama_alternatif' => $validated['nama_alternatif'],
+                'keterangan' => $validated['keterangan'],
             ]);
             DB::commit();
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             return redirect()->back()->withErrors('error', 'Gagal menambahkan alternatif');
         }
@@ -75,16 +78,21 @@ class AlternatifController extends Controller
     public function updateAlternatif(Request $request){
         $validated = $request->validate([
             'id' => 'required|integer',
-            'nama_alternatif' => 'required|string'
+            'kode' => 'required|string',
+            'nama_alternatif' => 'required|string',
+            'keterangan' => 'string|nullable'
         ]);
 
         DB::beginTransaction();
         try {
             Alternatif::where('id', $validated['id'])->update([
-                'nama_alternatif' => $validated['nama_alternatif']
+                'kode' => $validated['kode'],
+                'nama_alternatif' => $validated['nama_alternatif'],
+                'keterangan' => $validated['keterangan'],
             ]);
             DB::commit();
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             return redirect()->back()->withErrors('error', 'Gagal mengupdate alternatif');
         }
