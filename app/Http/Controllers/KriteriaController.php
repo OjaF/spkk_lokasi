@@ -40,9 +40,11 @@ class KriteriaController extends Controller
         DB::beginTransaction();
         try {
             Kriteria::create([
+                'kode' => $validated['kode'],
                 'nama_kriteria' => $validated['nama'],
                 'bobot' => $validated['bobot'],
                 'role' => $validated['role'],
+                'atribut' => $validated['atribut'],
             ]);
 
             DB::commit();
@@ -93,6 +95,8 @@ class KriteriaController extends Controller
             'id' => 'required|exists:kriterias,id',
             'nama' => 'required',
             'bobot' => 'required',
+            'atribut' => 'required',
+            'kode' => 'required',
         ]);
 
         $kriteria = Kriteria::find($validated['id']);
@@ -106,6 +110,8 @@ class KriteriaController extends Controller
             $kriteria->update([
                 'nama_kriteria' => $validated['nama'],
                 'bobot' => $validated['bobot'],
+                'atribut' => $validated['atribut'],
+                'kode' => $validated['kode'],
             ]);
 
             DB::commit();

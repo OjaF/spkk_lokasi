@@ -25,6 +25,8 @@ class CreateKriteriaRequest extends FormRequest
             'nama' => 'required|string',
             'bobot' => 'required|numeric|between:0,1',
             'role' => 'required|string',
+            'atribut' => 'required|string|in:cost,benefit',
+            'kode' => 'required|string',
         ];
     }
 
@@ -36,13 +38,13 @@ class CreateKriteriaRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'kode.required' => 'Kode kriteria harus diisi',
             'nama.required' => 'Nama kriteria harus diisi',
             'nama.string' => 'Nama kriteria harus berupa string',
             'bobot.required' => 'Bobot kriteria harus diisi',
             'bobot.numeric' => 'Bobot kriteria harus berupa angka',
             'bobot.between' => 'Bobot kriteria harus diantara 0 sampai 1',
             'role.required' => 'Role kriteria harus diisi',
-            
         ];
     }
 }

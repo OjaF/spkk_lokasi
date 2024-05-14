@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('kriterias', function (Blueprint $table) {
             $table->id();
+            $table->string("kode");
             $table->string("nama_kriteria");
             $table->string('role')->enum(['marketing', 'finance', 'stakeholder']);
             $table->float("bobot");
+            $table->string("atribut");
             $table->timestamps();
         });
     }

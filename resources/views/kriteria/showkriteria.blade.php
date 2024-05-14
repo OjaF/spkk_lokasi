@@ -161,18 +161,22 @@
                     <table class="text-surface min-w-full text-start text-sm font-light">
                         <thead class="border-b border-neutral-200 bg-secondary font-medium text-white">
                             <tr>
+                                <th scope="col" class="px-6 py-2">Kode</th>
                                 <th scope="col" class="px-6 py-2">Nama Kriteria</th>
                                 <th scope="col" class="px-6 py-2">Bobot</th>
+                                <th scope="col" class="px-6 py-2">Atribut</th>
                                 <th scope="col" class="px-6 py-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($dataKriteria as $item)
                                 <tr class="border-b border-neutral-200 hover:bg-primary/10">
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold">
+                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r uppercase">{{ $item->kode }}</td>
+                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r capitalize">
                                         {{ $item->nama_kriteria }}
                                     </td>
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold">{{ $item->bobot }}</td>
+                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->bobot }}</td>
+                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r capitalize">{{ $item->atribut }}</td>
                                     <td class="flex gap-2 whitespace-nowrap px-6 py-2 justify-end">
                                         {{-- Edit --}}
                                         <form id="edit-{{ $item->id }}" action="#" method="post">
@@ -182,7 +186,7 @@
                                                 data-modal-toggle="secondary-modal"
                                                 class="rounded-md bg-yellow-200 p-1 text-yellow-700"
                                                 type="button"
-                                                onclick="setEditData('{{ $item->nama_kriteria }}', '{{ $item->bobot }}', '{{ $item->id }}')"
+                                                onclick="setEditData('{{ $item->nama_kriteria }}', '{{ $item->bobot }}', '{{ $item->id }}', '{{ $item->kode }}', '{{ $item->atribut }}')"
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -269,6 +273,18 @@
 
                     <div class="flex flex-col gap-2 p-2">
                         <div class="flex flex-col gap-1">
+                            <label for="name" class="font-semibold">Kode Kriteria</label>
+                            <input
+                                type="text"
+                                name="kode"
+                                id="kode"
+                                class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
+                                placeholder="Kode Kriteria"
+                                required
+                            />
+                        </div>
+
+                        <div class="flex flex-col gap-1">
                             <label for="name" class="font-semibold">Nama Kriteria</label>
                             <input
                                 type="text"
@@ -294,6 +310,14 @@
                                 placeholder="Bobot"
                                 required
                             />
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="atribut" class="font-semibold">Atribut</label>
+                            <select name="atribut" id="atribut" class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin">
+                                <option value="benefit">Benefit</option>
+                                <option value="cost">Cost</option>
+                            </select>
                         </div>
 
                         <input type="text" name="role" value="{{ Auth::user()->role }}" hidden />
@@ -347,6 +371,18 @@
 
                     <div class="flex flex-col gap-2 p-2">
                         <div class="flex flex-col gap-1">
+                            <label for="name" class="font-semibold">Kode Kriteria</label>
+                            <input
+                                type="text"
+                                name="kode"
+                                id="edit_kode_kriteria"
+                                class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
+                                placeholder="Kode Kriteria"
+                                required
+                            />
+                        </div>
+
+                        <div class="flex flex-col gap-1">
                             <label for="name" class="font-semibold">Nama Kriteria</label>
                             <input
                                 type="text"
@@ -374,6 +410,14 @@
                             />
                         </div>
 
+                        <div class="flex flex-col gap-1">
+                            <label for="atribut" class="font-semibold">Atribut</label>
+                            <select name="atribut" id="edit_atribut_kriteria" class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin">
+                                <option value="benefit">Benefit</option>
+                                <option value="cost">Cost</option>
+                            </select>
+                        </div>
+
                         <input type="text" name="role" value="{{ Auth::user()->role }}" hidden />
 
                         <div class="flex justify-end gap-2">
@@ -398,13 +442,21 @@
         </div>
     </div>
     <script>
-        function setEditData(nama, bobot, idKriteria) {
+        function setEditData(nama, bobot, idKriteria, kode, atribut) {
             const editNamaKriteria = document.getElementById('edit_nama_kriteria');
             const editBobotKriteria = document.getElementById('edit_bobot_kriteria');
             const editIdKriteria = document.getElementById('edit_id_kriteria');
+            const editKodeKriteria = document.getElementById('edit_kode_kriteria');
+            const editAtributKriteria = document.getElementById('edit_atribut_kriteria');
             editNamaKriteria.value = nama;
             editBobotKriteria.value = bobot;
             editIdKriteria.value = idKriteria;
+            editKodeKriteria.value = kode;
+            if (atribut == "benefit") {
+                editAtributKriteria.selectedIndex = 0;
+            }else{
+                editAtributKriteria.selectedIndex = 1;
+            }
         }
     </script>
 @endsection
