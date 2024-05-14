@@ -29,6 +29,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/subkriteria/delete', 'SubKriteriaController@deleteSubkriteria')->name('subkriteria.delete');
         Route::post('/subkriteria/update', 'SubKriteriaController@updateSubkriteria')->name('subkriteria.update');
 
+        // Routes untuk penilaian
+        Route::get('/penilaian', 'PenilaianController@penilaianPage')->name('penilaian.show');
+        Route::get('/penilaian/{id}', 'PenilaianController@penilaianDetailPage')->name('penilaian.detail');
+        Route::post('/penilaian/create', 'PenilaianController@createPenilaian')->name('penilaian.create');
+
         // Routes untuk role marketing
         Route::group(['middleware' => ['userRoles:marketing']], function () {
             Route::get('/user', 'UserController@userPage')->name('user.show');

@@ -150,7 +150,7 @@
                         </li>
                         <li>
                             <a
-                                href="{{ route('dashboard') }}"
+                                href="{{ route('penilaian.show') }}"
                                 class="relative flex h-11 flex-row items-center border-l-4 border-transparent pr-6 text-white hover:border-blue-400 hover:bg-gray-50 hover:text-gray-800 focus:outline-none"
                             >
                                 <span class="ml-4 inline-flex items-center justify-center">

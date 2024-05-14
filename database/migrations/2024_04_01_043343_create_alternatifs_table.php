@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string("kode");
             $table->string('nama_alternatif');   
             $table->string('keterangan')->nullable();
+            $table->boolean('marketing')->nullable()->default(false);
+            $table->boolean('finance')->nullable()->default(false);
+            $table->boolean('stakeholder')->nullable()->default(false);
             $table->timestamps();
         });
     }
