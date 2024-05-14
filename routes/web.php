@@ -33,6 +33,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/penilaian', 'PenilaianController@penilaianPage')->name('penilaian.show');
         Route::get('/penilaian/{id}', 'PenilaianController@penilaianDetailPage')->name('penilaian.detail');
         Route::post('/penilaian/create', 'PenilaianController@createPenilaian')->name('penilaian.create');
+        Route::post('/penilaian/delete', 'PenilaianController@deletePenilaian')->name('penilaian.delete');
 
         // Routes untuk role marketing
         Route::group(['middleware' => ['userRoles:marketing']], function () {

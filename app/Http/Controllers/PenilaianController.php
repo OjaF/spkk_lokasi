@@ -81,7 +81,18 @@ class PenilaianController extends Controller
 
     public function deletePenilaian(StorePenilaianRequest $request)
     {
-        Penilaian::where('id', $request->id)->delete();
+        DB::beginTransaction();
+        try {
+            $penilaian = Penilaian::where('id_alternatif', $request->id_alternatif)->where('role', $request->role)->delete();
+            $alternatif = Alternatif::where('id', $request->id_alternatif)->update([
+                $request->role => false,
+            ]);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th);
+            //throw $th
+        }
         return redirect()->route('penilaian.show');
     }
 
