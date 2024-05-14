@@ -74,8 +74,6 @@ class PenilaianController extends Controller
             dd($th);
         }
 
-        
-
         return redirect()->route('penilaian.show');
     }
 
@@ -96,9 +94,21 @@ class PenilaianController extends Controller
         return redirect()->route('penilaian.show');
     }
 
-    public function updatePenilaian(UpdatePenilaianRequest $request)
+    public function getData($id)
     {
-        Penilaian::where('id', $request->id)->update($request->validated());
-        return redirect()->route('penilaian.show');
+        // $dataPenilaian = Penilaian::where('id_alternatif', $id)->where('role', Auth::user()->role)->get();
+        $data = DB::table('penilaians')
+                    ->leftJoin('kriterias', 'penilaians.id_kriteria', '=', 'kriterias.id')
+                    ->where('id_alternatif', $id)->where('penilaians.role', Auth::user()->role)->get(["id_kriteria","nama_kriteria", "nilai"]);
+
+        foreach ($data as $penilaian) {
+            $datasubkriteria = DB::table('sub_kriterias')
+                                ->where('id_kriteria', $penilaian->id_kriteria)
+                                ->where('nilai', $penilaian->nilai)
+                                ->first();
+            $penilaian->subkriteria = $datasubkriteria->nama_subkriteria;
+        }
+        
+        return response()->json($data);
     }
 }

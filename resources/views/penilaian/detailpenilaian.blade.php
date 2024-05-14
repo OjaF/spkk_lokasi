@@ -92,7 +92,7 @@
                 @foreach ($dataKriteria as $kriteria)
                     <div class="w-full rounded-xl">
                         <div class="font-bold bg-primary p-2 text-white text-md rounded-t-xl">
-                            <p>{{ $kriteria->nama_kriteria }}</p>
+                            <p>{{ $kriteria->kode }} - {{ $kriteria->nama_kriteria }}</p>
                         </div>
     
                         <div>
