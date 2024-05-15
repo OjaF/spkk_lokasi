@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
 
 class PenilaianController extends Controller
 {
+    function calculate_rank($rank_values): array {
+        $rank = [];
+        $temp = $rank_values;
+        rsort($temp);
+        $rank = array_map(function($value) use ($temp) {
+            return array_search($value, $temp) + 1;
+        }, $rank_values);
+        return $rank;
+    }
+
     public function penilaianPage(Request $request)
     {
         $page = 10;
@@ -108,7 +118,121 @@ class PenilaianController extends Controller
                                 ->first();
             $penilaian->subkriteria = $datasubkriteria->nama_subkriteria;
         }
-        
+
         return response()->json($data);
+    }
+
+    public function hasilPerhitungan($role){
+        $dataAlternatif = Alternatif::all();
+        $dataKriteria = Kriteria::where('role', Auth::user()->role)->get();
+
+        $dataTambahan = [];
+
+        // Ambil data penilaian
+        foreach ($dataAlternatif as $key => $alternatif) {
+            $dataAlternatif[$key]->penilaian = DB::table('penilaians')
+                                            ->leftJoin('kriterias', 'penilaians.id_kriteria', '=', 'kriterias.id')
+                                            ->where('id_alternatif', $alternatif->id)
+                                            ->where('penilaians.role', Auth::user()->role)
+                                            ->get()->toArray();
+        }
+        $matriks["matriks_nilai_alternatif"] = unserialize(serialize($dataAlternatif));
+
+        // Normalisasi Alternatif
+        foreach ($dataAlternatif as $alternatif) {
+            foreach ($alternatif->penilaian as $penilaian) {
+                $penilaian->nilai = $penilaian->nilai*$penilaian->nilai;
+            }
+        }
+        $matriks["matriks_normalisasi_alternatif_kuadrat"] = unserialize(serialize($dataAlternatif));
+
+        $jumlah = [];
+        foreach ($dataAlternatif[0]->penilaian as $key => $kriteria) {
+            $sum = 0;
+            foreach ($dataAlternatif as $alternatif) {
+                $sum += $alternatif->penilaian[$key]->nilai;
+            }
+            $jumlah[$key] = $sum;
+        }
+        $dataTambahan["matriks_normalisasi_alternatif_kuadrat"] = $jumlah;
+
+        // Normalisasi Alternatif
+        foreach ($dataAlternatif as $alternatif) {
+            foreach ($alternatif->penilaian as $key => $penilaian) {
+                $penilaian->nilai = sqrt($penilaian->nilai)/sqrt($dataTambahan["matriks_normalisasi_alternatif_kuadrat"][$key]);
+            }
+        }
+        $matriks["matriks_normalisasi_alternatif_dibagi_kuadrat"] = unserialize(serialize($dataAlternatif));
+
+        // Normalisasi Bobot
+        foreach ($dataAlternatif as $key => $alternatif) {
+            foreach ($alternatif->penilaian as $penilaian) {
+                $penilaian->nilai = $penilaian->nilai*$penilaian->bobot;
+            }
+        }
+        $matriks["matriks_normalisasi_alternatif_terbobot"] = unserialize(serialize($dataAlternatif));
+
+        // Perhitungan Solusi Ideal Positif dan Negatif
+        $solusiIdealPositif = [];
+        $solusiIdealNegatif = [];
+        foreach ($dataAlternatif[0]->penilaian as $key => $kriteria) {
+            $max = 0;
+            $min = 1000000000;
+            foreach ($dataAlternatif as $alternatif) {
+                if($alternatif->penilaian[$key]->nilai > $max){
+                    $max = $alternatif->penilaian[$key]->nilai;
+                }
+                if($alternatif->penilaian[$key]->nilai < $min){
+                    $min = $alternatif->penilaian[$key]->nilai;
+                }
+            }
+
+            if($dataKriteria[$key]->atribut == 'benefit'){
+                $solusiIdealPositif[$key] = $max;
+                $solusiIdealNegatif[$key] = $min;
+            } else {
+                $solusiIdealPositif[$key] = $min;
+                $solusiIdealNegatif[$key] = $max;
+            }
+        }
+
+        $dataTambahan["solusi_ideal_positif"] = $solusiIdealPositif;
+        $dataTambahan["solusi_ideal_negatif"] = $solusiIdealNegatif;
+
+        // Perhitungan Jarak Alternatif dengan Solusi Ideal Positif dan Negatif
+        $solusiIdeal = [];
+        foreach ($dataAlternatif as $key => $alternatif) {
+            $data["positif"] = 0;
+            $data["negatif"] = 0;
+            foreach ($alternatif->penilaian as $key => $kriteria) {
+                $data["positif"] += pow($kriteria->nilai - $solusiIdealPositif[$key], 2);
+                $data["negatif"] += pow($kriteria->nilai - $solusiIdealNegatif[$key], 2);
+            }
+
+            array_push($solusiIdeal, $data);
+        }
+
+        $dataTambahan["selisih_solusi_ideal"] = $solusiIdeal;
+
+        // Kuadrat Selisih Solusi Ideal
+        foreach ($solusiIdeal as $key => $solusi) {
+            $solusiIdeal[$key]["positif"] = sqrt($solusi["positif"]);
+            $solusiIdeal[$key]["negatif"] = sqrt($solusi["negatif"]);
+        }
+
+        $dataTambahan["kuadrat_selisih_solusi_ideal"] = $solusiIdeal;
+
+        // Perhitungan nilai preferensi
+        $nilaiPreferensi = [];
+        foreach ($solusiIdeal as $key => $solusi) {
+            $nilaiPreferensi[$key] = $solusi["negatif"]/($solusi["positif"]+$solusi["negatif"]);
+        }
+        $dataTambahan["nilai_preferensi"] = $nilaiPreferensi;
+        $dataTambahan["rank"] = $this->calculate_rank($nilaiPreferensi);
+        
+
+        // dd($solusiIdeal);
+
+        return view('penilaian.hasilperhitungan', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan]);
     }
 }
