@@ -24,107 +24,9 @@ class PenilaianController extends Controller
         return $rank;
     }
 
-    public function penilaianPage(Request $request)
-    {
-        $page = 10;
-        if ($request->q != null) {
-            $page = $request->q;
-        }
-
-
-        $dataAlternatif = Alternatif::where('nama_alternatif', 'LIKE', '%' . $request->search_query . '%')
-        ->paginate($page);
-
-        return view('penilaian.showpenilaian', ['dataAlternatif' => $dataAlternatif]);
-    }
-
-    public function penilaianDetailPage($id){
-        $alternatif = Alternatif::where('id', $id)->first();
-        $dataKriteria = Kriteria::where('role', Auth::user()->role)->get();
-
-        foreach ($dataKriteria as $key => $kriteria) {
-            $dataKriteria[$key]->subkriteria = SubKriteria::where('id_kriteria', $kriteria->id)->orderByDesc('nilai')->get();
-        }
-
-        return view('penilaian.detailpenilaian', ['dataKriteria' => $dataKriteria, 'alternatif' => $alternatif]);
-    }
-
-    public function createPenilaian(StorePenilaianRequest $request)
-    {
-        $role = Auth::user()->role;
-        $alternatif = Alternatif::where('id', $request->id_alternatif)->first();
-        $allKriteria = Kriteria::where('role', Auth::user()->role)->get();
-
-        DB::beginTransaction();
-        try {
-            foreach ($allKriteria as $kriteria) {
-                $nilai = $request->input($kriteria->id);
-                
-                Penilaian::create([
-                    'id_alternatif' => $request->id_alternatif,
-                    'role' => $role,
-                    'id_kriteria' => $kriteria->id,
-                    'nilai' => $nilai
-                ]);
-            }
-
-            if($role == 'marketing'){
-                $alternatif->marketing = true;
-            } else if($role == 'finance'){
-                $alternatif->finance = true;
-            } else if($role == 'stakeholder'){
-                $alternatif->stakeholder = true;
-            }
-
-            $alternatif->save();
-
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            dd($th);
-        }
-
-        return redirect()->route('penilaian.show');
-    }
-
-    public function deletePenilaian(StorePenilaianRequest $request)
-    {
-        DB::beginTransaction();
-        try {
-            $penilaian = Penilaian::where('id_alternatif', $request->id_alternatif)->where('role', $request->role)->delete();
-            $alternatif = Alternatif::where('id', $request->id_alternatif)->update([
-                $request->role => false,
-            ]);
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            dd($th);
-            //throw $th
-        }
-        return redirect()->route('penilaian.show');
-    }
-
-    public function getData($id)
-    {
-        // $dataPenilaian = Penilaian::where('id_alternatif', $id)->where('role', Auth::user()->role)->get();
-        $data = DB::table('penilaians')
-                    ->leftJoin('kriterias', 'penilaians.id_kriteria', '=', 'kriterias.id')
-                    ->where('id_alternatif', $id)->where('penilaians.role', Auth::user()->role)->get(["id_kriteria","nama_kriteria", "nilai"]);
-
-        foreach ($data as $penilaian) {
-            $datasubkriteria = DB::table('sub_kriterias')
-                                ->where('id_kriteria', $penilaian->id_kriteria)
-                                ->where('nilai', $penilaian->nilai)
-                                ->first();
-            $penilaian->subkriteria = $datasubkriteria->nama_subkriteria;
-        }
-
-        return response()->json($data);
-    }
-
-    public function hasilPerhitungan($role){
+    function getPenilaianTopsis($role) {
         $dataAlternatif = Alternatif::all();
-        $dataKriteria = Kriteria::where('role', Auth::user()->role)->get();
+        $dataKriteria = Kriteria::where('role', $role)->get();
 
         $dataTambahan = [];
 
@@ -133,7 +35,7 @@ class PenilaianController extends Controller
             $dataAlternatif[$key]->penilaian = DB::table('penilaians')
                                             ->leftJoin('kriterias', 'penilaians.id_kriteria', '=', 'kriterias.id')
                                             ->where('id_alternatif', $alternatif->id)
-                                            ->where('penilaians.role', Auth::user()->role)
+                                            ->where('penilaians.role', $role)
                                             ->get()->toArray();
         }
         $matriks["matriks_nilai_alternatif"] = unserialize(serialize($dataAlternatif));
@@ -229,10 +131,223 @@ class PenilaianController extends Controller
         }
         $dataTambahan["nilai_preferensi"] = $nilaiPreferensi;
         $dataTambahan["rank"] = $this->calculate_rank($nilaiPreferensi);
-        
 
-        // dd($solusiIdeal);
+        $result = [
+            'matriks' => $matriks,
+            'dataTambahan' => $dataTambahan
+        ];
 
-        return view('penilaian.hasilperhitungan', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan]);
+        return $result; 
     }
+
+    function getPenilaianBorda() {
+        $dataAlternatif = Alternatif::all();
+
+        // Ambil data penilaian marketing
+        $topsisMarketing = $this->getPenilaianTopsis('marketing');
+        $preferensiMarketing = $topsisMarketing['dataTambahan']['nilai_preferensi'];
+        $rankMarketing = $topsisMarketing['dataTambahan']['rank'];
+
+        // Ambil data penilaian finance
+        $topsisFinance = $this->getPenilaianTopsis('finance');
+        $preferensiFinance = $topsisFinance['dataTambahan']['nilai_preferensi'];
+        $rankFinance = $topsisFinance['dataTambahan']['rank'];
+
+        // Ambil data penilaian stakeholder
+        $topsisStakeholder = $this->getPenilaianTopsis('stakeholder');
+        $preferensiStakeholder = $topsisStakeholder['dataTambahan']['nilai_preferensi'];
+        $rankStakeholder = $topsisStakeholder['dataTambahan']['rank'];
+
+        foreach ($dataAlternatif as $key => $alternatif) {
+            for ($i=1; $i <= count($dataAlternatif); $i++) { 
+                $alternatif[$i] = 0;
+            }
+
+            $alternatif[$rankMarketing[$key]] += $preferensiMarketing[$key];
+            $alternatif[$rankFinance[$key]] += $preferensiFinance[$key];
+            $alternatif[$rankStakeholder[$key]] += $preferensiStakeholder[$key];
+        }
+
+        $pointBorda = [];
+        foreach ($dataAlternatif as $key => $alternatif) {
+            for ($i=1; $i <= count($dataAlternatif); $i++) { 
+                $alternatif[$i] = $alternatif[$i]*(count($dataAlternatif)-$i+1);
+            }
+
+            $sum = 0;
+            for ($i=1; $i <= count($dataAlternatif); $i++) { 
+                $sum += $alternatif[$i];
+            }
+
+            array_push($pointBorda, $sum);
+        }
+
+        $nilaiBorda = [];
+        $totalPointBorda = array_sum($pointBorda);
+        foreach ($pointBorda as $key => $point) {
+            array_push($nilaiBorda, $point/$totalPointBorda);
+        }
+
+        $rankBorda = $this->calculate_rank($nilaiBorda);
+
+        foreach ($dataAlternatif as $key => $alternatif) {
+            $alternatif["nilai_borda"] = $nilaiBorda[$key];
+            $alternatif["rank_borda"] = $rankBorda[$key];
+        }
+
+        return $dataAlternatif;
+    }
+
+    public function penilaianPage(Request $request)
+    {
+        $page = 10;
+        if ($request->q != null) {
+            $page = $request->q;
+        }
+
+
+        $dataAlternatif = Alternatif::where('nama_alternatif', 'LIKE', '%' . $request->search_query . '%')
+        ->paginate($page);
+
+        return view('penilaian.showpenilaian', ['dataAlternatif' => $dataAlternatif]);
+    }
+
+    public function penilaianDetailPage($id){
+        $alternatif = Alternatif::where('id', $id)->first();
+        $dataKriteria = Kriteria::where('role', Auth::user()->role)->get();
+
+        foreach ($dataKriteria as $key => $kriteria) {
+            $dataKriteria[$key]->subkriteria = SubKriteria::where('id_kriteria', $kriteria->id)->orderByDesc('nilai')->get();
+        }
+
+        return view('penilaian.detailpenilaian', ['dataKriteria' => $dataKriteria, 'alternatif' => $alternatif]);
+    }
+
+    public function createPenilaian(StorePenilaianRequest $request)
+    {
+        $role = Auth::user()->role;
+        $alternatif = Alternatif::where('id', $request->id_alternatif)->first();
+        $allKriteria = Kriteria::where('role', Auth::user()->role)->get();
+
+        DB::beginTransaction();
+        try {
+            foreach ($allKriteria as $kriteria) {
+                $nilai = $request->input($kriteria->id);
+                
+                Penilaian::create([
+                    'id_alternatif' => $request->id_alternatif,
+                    'role' => $role,
+                    'id_kriteria' => $kriteria->id,
+                    'nilai' => $nilai
+                ]);
+            }
+
+            if($role == 'marketing'){
+                $alternatif->marketing = true;
+            } else if($role == 'finance'){
+                $alternatif->finance = true;
+            } else if($role == 'stakeholder'){
+                $alternatif->stakeholder = true;
+            }
+
+            $alternatif->save();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th);
+        }
+
+        return redirect()->route('penilaian.show');
+    }
+
+    public function deletePenilaian(StorePenilaianRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            $penilaian = Penilaian::where('id_alternatif', $request->id_alternatif)->where('role', $request->role)->delete();
+            $alternatif = Alternatif::where('id', $request->id_alternatif)->update([
+                $request->role => false,
+            ]);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th);
+            //throw $th
+        }
+        return redirect()->route('penilaian.show');
+    }
+
+    public function getData($id)
+    {
+        $data = DB::table('penilaians')
+                    ->leftJoin('kriterias', 'penilaians.id_kriteria', '=', 'kriterias.id')
+                    ->where('id_alternatif', $id)->where('penilaians.role', Auth::user()->role)->get(["id_kriteria","nama_kriteria", "nilai"]);
+
+        foreach ($data as $penilaian) {
+            $datasubkriteria = DB::table('sub_kriterias')
+                                ->where('id_kriteria', $penilaian->id_kriteria)
+                                ->where('nilai', $penilaian->nilai)
+                                ->first();
+            $penilaian->subkriteria = $datasubkriteria->nama_subkriteria;
+        }
+
+        return response()->json($data);
+    }
+
+    public function hasilPerhitungan($role){
+        $alternatif = Alternatif::all();
+        $allgreen = true;
+
+        foreach ($alternatif as $key => $value) {
+            if($value->marketing == false){
+                $allgreen = false;
+            }
+
+            if($value->finance == false){
+                $allgreen = false;
+            }
+
+            if($value->stakeholder == false){
+                $allgreen = false;
+            }
+        }
+
+        if ($allgreen == false) {
+            return view('penilaian.hasilperhitungan', ['allgreen' => $allgreen])->withErrors(['error' => 'Data penilaian belum lengkap']);
+        }
+
+        $result = $this->getPenilaianTopsis($role);
+        $matriks = $result['matriks'];
+        $dataTambahan = $result['dataTambahan'];
+        
+        return view('penilaian.hasilperhitungan', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'allgreen' => $allgreen]);
+    }
+
+    public function hasilAkhir($role) {
+        $alternatif = Alternatif::all();
+        $allgreen = true;
+
+        foreach ($alternatif as $key => $value) {
+            if($value->marketing == false){
+                $allgreen = false;
+            }
+
+            if($value->finance == false){
+                $allgreen = false;
+            }
+
+            if($value->stakeholder == false){
+                $allgreen = false;
+            }
+        }
+
+        if ($allgreen == false) {
+            return view('penilaian.hasilperhitungan', ['allgreen' => $allgreen])->withErrors(['error' => 'Data penilaian belum lengkap']);
+        }
+
+        $hasil = $this->getPenilaianBorda();
+
+        return view('penilaian.hasilakhir', ['allgreen' => $allgreen, 'hasil' => $hasil]);
+    } 
 }

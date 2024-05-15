@@ -85,7 +85,8 @@
         </div>
     @endif
 
-    {{-- Table --}}
+    @if($allgreen == true)
+        {{-- Table --}}
     <div class="flex flex-col gap-5 bg-white">
         <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
             <div class="flex gap-2 p-2 py-1 ">
@@ -456,8 +457,8 @@
                 </div>
             </div>
         </div>
-
     </div>
+    @endif
 </div>
     
 @endsection

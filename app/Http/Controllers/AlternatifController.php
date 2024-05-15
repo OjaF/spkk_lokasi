@@ -7,6 +7,7 @@ use App\Http\Requests\CreateAlternatifRequest;
 use App\Models\Alternatif;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Penilaian;
 
 class AlternatifController extends Controller
 {
@@ -61,9 +62,12 @@ class AlternatifController extends Controller
 
         DB::beginTransaction();
         try {
-            Alternatif::where('id', $validated['id'])->delete();
+            $alternatif = Alternatif::where('id', $validated['id']);
+            Penilaian::where('id_alternatif', $validated['id'])->delete();
+            $alternatif->delete();
             DB::commit();
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             return redirect()->back()->withErrors('error', 'Gagal menghapus alternatif');
         }

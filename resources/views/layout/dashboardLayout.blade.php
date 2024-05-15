@@ -198,7 +198,7 @@
                         </li>
                         <li>
                             <a
-                                href="{{ route('dashboard') }}"
+                                href="{{ route('penilaian.hasilakhir', ['role' => Auth::user()->role]) }}"
                                 class="relative flex h-11 flex-row items-center border-l-4 border-transparent pr-6 text-white hover:border-blue-400 hover:bg-gray-50 hover:text-gray-800 focus:outline-none"
                             >
                                 <span class="ml-4 inline-flex items-center justify-center">
@@ -271,7 +271,7 @@
                             class="flex w-auto min-w-32 justify-end gap-2 p-3 hover:bg-primary"
                             onclick="toogleDropdown()"
                         >
-                            <p class="text-md font-thin text-white">{{ Auth::user()->name }}</p>
+                            <p class="text-md font-normal text-white">{{ Auth::user()->name }}</p>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -288,7 +288,7 @@
                             </svg>
                         </button>
 
-                        <div id="dropdownMenu" class="fixed hidden w-auto rounded-md border text-sm shadow-md">
+                        <div id="dropdownMenu" class="fixed hidden w-auto rounded-md border text-sm shadow-md bg-white py-2">
                             <a
                                 href="{{ route('change-password.show') }}"
                                 class="block rounded-md p-1 px-3 hover:bg-primary hover:text-white"
