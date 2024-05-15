@@ -170,10 +170,10 @@
                         <tbody>
                             @foreach ($dataAlternatif as $item)
                                 <tr class="border-b border-neutral-200 hover:bg-primary/10">
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->kode }}</td>
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->nama_alternatif }}</td>
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->keterangan }}</td>
-                                    <td class="flex gap-2 whitespace-nowrap px-6 py-2 justify-end">
+                                    <td class="whitespace-wrap px-6 py-2 font-semibold border-r">{{ $item->kode }}</td>
+                                    <td class="whitespace-wrap px-6 py-2 font-semibold border-r">{{ $item->nama_alternatif }}</td>
+                                    <td class="whitespace-wrap px-6 py-2 font-semibold border-r">{{ $item->keterangan }}</td>
+                                    <td class="flex gap-2 whitespace-wrap px-6 py-2 justify-end">
                                         {{-- Edit --}}
                                         <form id="edit-{{ $item->id }}" action="#" method="post">
                                             @csrf

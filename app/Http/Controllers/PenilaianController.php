@@ -140,6 +140,24 @@ class PenilaianController extends Controller
         return $result; 
     }
 
+    function getHasilTopsis($role) {
+        $finalResult = [];
+        $topsis = $this->getPenilaianTopsis($role);
+        $preferensi = $topsis['dataTambahan']['nilai_preferensi'];
+        $rank = $topsis['dataTambahan']['rank'];
+        $alternatif = Alternatif::all();
+
+        foreach ($preferensi as $key => $value) {
+            $finalResult[$key] = [
+                'nilai_preferensi' => $value,
+                'rank' => $rank[$key],
+                'nama_alternatif' => $alternatif[$key]->nama_alternatif
+            ];
+        }
+
+        return $finalResult;
+    }
+
     function getPenilaianBorda() {
         $dataAlternatif = Alternatif::all();
 
@@ -191,6 +209,7 @@ class PenilaianController extends Controller
         $rankBorda = $this->calculate_rank($nilaiBorda);
 
         foreach ($dataAlternatif as $key => $alternatif) {
+            $alternatif["point_borda"] = $pointBorda[$key];
             $alternatif["nilai_borda"] = $nilaiBorda[$key];
             $alternatif["rank_borda"] = $rankBorda[$key];
         }
@@ -348,6 +367,11 @@ class PenilaianController extends Controller
 
         $hasil = $this->getPenilaianBorda();
 
-        return view('penilaian.hasilakhir', ['allgreen' => $allgreen, 'hasil' => $hasil]);
+        $dataTopsis = [];
+        $dataTopsis['marketing'] = $this->getHasilTopsis('marketing');
+        $dataTopsis['finance'] = $this->getHasilTopsis('finance');
+        $dataTopsis['stakeholder'] = $this->getHasilTopsis('stakeholder');
+
+        return view('penilaian.hasilakhir', ['allgreen' => $allgreen, 'hasil' => $hasil, 'dataTopsis' => $dataTopsis]);
     } 
 }

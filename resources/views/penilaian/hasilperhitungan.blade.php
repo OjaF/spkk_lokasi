@@ -443,7 +443,7 @@
                         <tbody>
                             @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"] as $key => $item)
                             @if ($dataTambahan["rank"][$key] == 1)
-                                <tr class="border-b border-neutral-200 text-center bg-green-100 hover:bg-green-100">
+                                <tr class="border-b border-neutral-200 text-center bg-green-100 hover:bg-green-100 font-bold">
                             @else
                                 <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
                             @endif

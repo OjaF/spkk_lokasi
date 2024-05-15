@@ -133,8 +133,8 @@
                     </form>
                 </div>
 
-                <div class="flex flex-col gap-5">
-                    <table class="text-surface min-w-full text-start text-sm font-light">
+                <div class="flex flex-col gap-5 border">
+                    <table class="max-w-full text-start text-sm font-light">
                         <thead class="border-b border-neutral-200 bg-secondary font-medium text-white">
                             <tr>
                                 <th scope="col" class="px-6 py-2">Kode Alternatif</th>
@@ -147,17 +147,31 @@
                         <tbody>
                             @foreach ($dataAlternatif as $item)
                                 <tr class="border-b border-neutral-200 hover:bg-primary/10">
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->kode }}</td>
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->nama_alternatif }}</td>
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->keterangan }}</td>
-                                    <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">
-                                        @if (($item->marketing == false && Auth::user()->role == 'marketing') || ($item->finance == false && Auth::user()->role == 'finance') || ($item->stakeholder == false && Auth::user()->role == 'stakeholder'))
-                                            <span class="bg-red-200 text-red-700 rounded-md p-2">Belum diisi</span>
-                                        @else
-                                            <span class="bg-green-200 text-green-700 rounded-md p-2">Sudah diisi</span>
-                                        @endif
+                                    <td class="whitespace-wrap px-6 py-2 font-semibold border-r">{{ $item->kode }}</td>
+                                    <td class="whitespace-wrap px-6 py-2 font-semibold border-r">{{ $item->nama_alternatif }}</td>
+                                    <td class="whitespace-wrap px-6 py-2 font-semibold border-r">{{ $item->keterangan }}</td>
+                                    <td class="whitespace-wrap px-6 py-2 font-semibold border-r">
+                                        <div class="flex gap-2 text-xs justify-center">
+                                            @if($item->marketing == false)
+                                            <p class="bg-red-200 text-red-700 rounded-md p-1">Marketing</p>
+                                            @else
+                                                <p class="bg-green-200 text-green-700 rounded-md p-1">Marketing</p>
+                                            @endif
+
+                                            @if($item->finance == false)
+                                                <p class="bg-red-200 text-red-700 rounded-md p-1">Finance</p>
+                                            @else
+                                                <p class="bg-green-200 text-green-700 rounded-md p-1">Finance</p>
+                                            @endif
+
+                                            @if($item->stakeholder == false)
+                                                <p class="bg-red-200 text-red-700 rounded-md p-1">Stakeholder</p>
+                                            @else
+                                                <p class="bg-green-200 text-green-700 rounded-md p-1">Stakeholder</p>
+                                            @endif
+                                        </div>
                                     </td>
-                                    <td class="flex gap-2 whitespace-nowrap px-6 py-2 justify-center">
+                                    <td class="flex gap-2 whitespace-wrap px-6 py-2 justify-center">
                                         {{-- Halaman Penilaian --}}
                                         @if (($item->marketing == false && Auth::user()->role == 'marketing') || ($item->finance == false && Auth::user()->role == 'finance') || ($item->stakeholder == false && Auth::user()->role == 'stakeholder'))
                                             <a href="{{route('penilaian.detail', ['id' => $item->id])}}" class="rounded-md bg-yellow-200 p-1 text-yellow-700">
