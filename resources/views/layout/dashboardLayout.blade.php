@@ -8,6 +8,7 @@
 
         {{-- Tailwind --}}
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="css/apexcharts.css">
     </head>
     <body>
         <div class="flex h-screen w-full">
@@ -402,5 +403,8 @@
             </div>
         </div>
         <script src="js/flowbite.min.js"></script>
+        <script src="js/preline.js"></script>
+        <script src="js/lodash.js"></script>
+        <script src="js/apexcharts.js"></script>
     </body>
 </html>

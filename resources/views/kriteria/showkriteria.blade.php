@@ -242,6 +242,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $dataKriteria->links() }}
                 </div>
             </div>
         </div>

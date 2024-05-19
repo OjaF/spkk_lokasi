@@ -34,7 +34,7 @@
                             Jumlah Kriteria
                         </div>
                         <div class="font-normal">
-                            20
+                            {{ $data["kriteria"] }}
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                             Jumlah Sub-Kriteria
                         </div>
                         <div class="font-normal">
-                            47
+                            {{ $data["subkriteria"] }}
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                             Jumlah Alternatif
                         </div>
                         <div class="font-normal">
-                            20
+                            {{ $data["alternatif"] }}
                         </div>
                     </div>
                 </div>
@@ -110,13 +110,9 @@
                                     </thead>
                                     <tbody class="">
                                         @foreach ($rank["nama_alternatif"] as $key => $item)
-                                            @if ($rank["nama_alternatif"][$key] == 1)
-                                                <tr class="border-b border-neutral-200 text-center bg-green-100 hover:bg-green-100 font-bold">
-                                            @else
-                                                <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                            @endif
-                                                <td class="px-6 py-1">{{ $rank["nama_alternatif"][$key] }}</td>
-                                                <td class="px-6 py-1">{{ $rank["rank_borda"][$key] }}</td>
+                                            <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                                <td class="px-6 py-1 font-normal">{{ $rank["nama_alternatif"][$key] }}</td>
+                                                <td class="px-6 py-1 font-normal">{{ $rank["rank_borda"][$key] }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -144,8 +140,189 @@
                     </div>
                 </div>
             </div>
-            <div class="col-span-2">
-                TBA
+            <div class="col-span-2 text-white border rounded-xl">
+                @if ($rank != null)
+                    <div class="flex gap-2 p-2 py-1 mb-6 bg-secondary rounded-t-xl">
+                @else
+                    <div class="flex gap-2 p-2 py-1 bg-secondary rounded-t-xl">
+                @endif
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="white"
+                        class="h-6 w-6"
+                    >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                    />
+                    </svg>
+                    <p class="font-semibold capitalize text-sm p-1">Hasil Akhir Perankingan</p>
+                </div>
+
+                @if ($rank != null)
+                    <div class="p-4 pb-6">
+                @else
+                    <div class="">
+                @endif
+                    @if ($rank != null)
+                        <div class="flex flex-col justify-center items-center h-[300px]">
+                            <div id="hs-horizontal-bar-chart" class="w-full h-full text-black"></div>
+                        </div>
+                    @else
+                        <div class="flex justify-between gap-2 rounded-md border border-yellow-200 bg-yellow-100 p-2 m-2 text-yellow-400">
+                            <div class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 p-1">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                                
+                
+                                
+                                <p class="font-medium">Mengunggu Hasil Penilaian</p>
+                            </div>
+                
+                            {{--
+                                <span class="">
+                                <svg class="fill-current h-6 w-6 text-red-400" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                                </span>
+                            --}}
+                        </div>
+                    @endif
+                </div>
+                <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
+                <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
+
+                <script>
+                  var data = @json($rank);
+                  window.addEventListener('load', () => {
+                    // Apex Horizontal Bar Chart
+                    (function () {
+                      buildChart('#hs-horizontal-bar-chart', (mode) => ({
+                        chart: {
+                          type: 'bar',
+                          height: 340,
+                        },
+                        series: [
+                          {
+                            name: 'Skor Borda',
+                            data: data.skor_borda
+                          }
+                        ],
+                        plotOptions: {
+                          bar: {
+                            horizontal: true,
+                            columnWidth: '16px',
+                            borderRadius: 0,
+                            dataLabels: {
+                              position: 'top'
+                            }
+                          },
+                        },
+                        legend: {
+                          show: false
+                        },
+                        dataLabels: {
+                          enabled: false,
+                          formatter: function(val) {
+                              return  val.toFixed(4);
+                          },  
+                          offsetX: 0,
+                          style: {
+                            colors: ['#000000']
+                          }
+                        },
+                        stroke: {
+                          show: true,
+                          width: 2,
+                          colors: ['transparent']
+                        },
+                        xaxis: {
+                          categories: data.nama_alternatif,
+                          crosshairs: {
+                            show: true
+                          },
+                          labels: {
+                            style: {
+                              colors: '#9ca3af',
+                              fontSize: '13px',
+                              fontFamily: 'Inter, ui-sans-serif',
+                              fontWeight: 0
+                            },
+                            offsetX: -2,
+                            formatter: (value) => value >= 1000 ? `${value / 1000}k` : value
+                          }
+                        },
+                        yaxis: {
+                          crosshairs: {
+                            show: true
+                          },
+                          labels: {
+                            align: 'left',
+                            minWidth: 0,
+                            maxWidth: 160,
+                            style: {
+                              colors: '#9ca3af',
+                              fontSize: '13px',
+                              fontFamily: 'Inter, ui-sans-serif',
+                              fontWeight: 400
+                            },
+                            offsetX: -20,
+                            formatter: (title) => title
+                          }
+                        },
+                        states: {
+                          hover: {
+                            filter: {
+                              type: 'darken',
+                              value: 0.9
+                            }
+                          }
+                        },
+                      }), {
+                        colors: ['#0B8C07'],
+                        xaxis: {
+                          labels: {
+                            style: {
+                              colors: '#000000',
+                            }
+                          }
+                        },
+                        yaxis: {
+                          labels: {
+                            style: {
+                              colors: '#000000'
+                            }
+                          }
+                        },
+                        grid: {
+                          borderColor: '#e5e7eb'
+                        }
+                      }, {
+                        colors: ['#3b82f6'],
+                        xaxis: {
+                          labels: {
+                            style: {
+                              colors: '#a3a3a3',
+                            }
+                          }
+                        },
+                        yaxis: {
+                          labels: {
+                            style: {
+                              colors: '#a3a3a3'
+                            }
+                          }
+                        },
+                        grid: {
+                          borderColor: '#404040'
+                        }
+                      });
+                    })();
+                  });
+                </script>
             </div>
         </div>
     </div>

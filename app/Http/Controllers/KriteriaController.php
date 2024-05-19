@@ -39,7 +39,7 @@ class KriteriaController extends Controller
 
         DB::beginTransaction();
         try {
-            Kriteria::create([
+            $kriteria = Kriteria::create([
                 'kode' => $validated['kode'],
                 'nama_kriteria' => $validated['nama'],
                 'bobot' => $validated['bobot'],

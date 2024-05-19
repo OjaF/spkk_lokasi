@@ -238,6 +238,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $dataAlternatif->links() }}
                 </div>
             </div>
         </div>
