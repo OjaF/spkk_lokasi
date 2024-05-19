@@ -16,7 +16,7 @@
                 <div class="flex w-full flex-col gap-5 py-4">
                     <div class="flex w-full justify-center gap-2">
                         <img src="{{ asset('images/database.svg') }}" alt="Logo" class="h-8 w-8" />
-                        <h1 class="text-center text-2xl font-bold">SPK - Tanah</h1>
+                        <h1 class="text-center text-2xl font-bold">PT. Mandiri Aceh Properti</h1>
                     </div>
                     <p class="text-center">Selamat datang, silahkan login terlebih dahulu!</p>
                 </div>

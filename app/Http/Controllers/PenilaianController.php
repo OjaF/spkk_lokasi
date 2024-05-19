@@ -48,6 +48,7 @@ class PenilaianController extends Controller
         }
         $matriks["matriks_normalisasi_alternatif_kuadrat"] = unserialize(serialize($dataAlternatif));
 
+        // Hitung jumlah nilai setiap kriteria
         $jumlah = [];
         foreach ($dataAlternatif[0]->penilaian as $key => $kriteria) {
             $sum = 0;
@@ -116,7 +117,7 @@ class PenilaianController extends Controller
 
         $dataTambahan["selisih_solusi_ideal"] = $solusiIdeal;
 
-        // Kuadrat Selisih Solusi Ideal
+        // Akar Kuadrat Selisih Solusi Ideal
         foreach ($solusiIdeal as $key => $solusi) {
             $solusiIdeal[$key]["positif"] = sqrt($solusi["positif"]);
             $solusiIdeal[$key]["negatif"] = sqrt($solusi["negatif"]);
@@ -336,9 +337,13 @@ class PenilaianController extends Controller
             return view('penilaian.hasilperhitungan', ['allgreen' => $allgreen])->withErrors(['error' => 'Data penilaian belum lengkap']);
         }
 
-        $result = $this->getPenilaianTopsis($role);
-        $matriks = $result['matriks'];
-        $dataTambahan = $result['dataTambahan'];
+        try {
+            $result = $this->getPenilaianTopsis($role);
+            $matriks = $result['matriks'];
+            $dataTambahan = $result['dataTambahan'];
+        } catch (\Throwable $th) {
+            return view('penilaian.hasilperhitungan', ['allgreen' => false])->withErrors(['error' => 'Data penilaian belum lengkap']);
+        }
         
         return view('penilaian.hasilperhitungan', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'allgreen' => $allgreen]);
     }
@@ -365,12 +370,16 @@ class PenilaianController extends Controller
             return view('penilaian.hasilperhitungan', ['allgreen' => $allgreen])->withErrors(['error' => 'Data penilaian belum lengkap']);
         }
 
-        $hasil = $this->getPenilaianBorda();
+        try {
+            $hasil = $this->getPenilaianBorda();
 
-        $dataTopsis = [];
-        $dataTopsis['marketing'] = $this->getHasilTopsis('marketing');
-        $dataTopsis['finance'] = $this->getHasilTopsis('finance');
-        $dataTopsis['stakeholder'] = $this->getHasilTopsis('stakeholder');
+            $dataTopsis = [];
+            $dataTopsis['marketing'] = $this->getHasilTopsis('marketing');
+            $dataTopsis['finance'] = $this->getHasilTopsis('finance');
+            $dataTopsis['stakeholder'] = $this->getHasilTopsis('stakeholder');
+        } catch (\Throwable $th) {
+            return view('penilaian.hasilperhitungan', ['allgreen' => false])->withErrors(['error' => 'Data penilaian belum lengkap']);
+        }
 
         return view('penilaian.hasilakhir', ['allgreen' => $allgreen, 'hasil' => $hasil, 'dataTopsis' => $dataTopsis]);
     } 

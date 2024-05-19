@@ -31,7 +31,7 @@
                             />
                         </svg>
 
-                        <p class="font-semibold">SPK - Dashboard</p>
+                        <p class="p-1 font-semibold text-xs text-center">PT. Mandiri Aceh Properti</p>
                     </div>
                     <div></div>
                 </div>
@@ -256,7 +256,7 @@
 
                 {{-- Footer --}}
                 <div class="bg-primary p-3 text-xs">
-                    <p>Copyright © 2024 Nama_Instansi</p>
+                    <p>Copyright © 2024 PT. Mandiri Aceh Properti</p>
                     <p>All Right Reserved.</p>
                 </div>
             </div>
@@ -346,8 +346,8 @@
                 </div>
 
                 {{-- Content --}}
-                <div class="flex flex-col gap-4 p-4 overflow-scroll no-scrollbar">
-                    <div class="py-2">
+                <div class="flex flex-col gap-4 p-4 overflow-scroll no-scrollbar h-full">
+                    <div class="max-h-full h-full">
                         @yield('content')
                     </div>
                 </div>

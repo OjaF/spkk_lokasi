@@ -13,9 +13,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::group(['middleware' => ['auth']], function () {
 
         // Dashboard
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', 'DashboardController@dashboardPage')->name('dashboard');
 
         // Routes untuk kriteria
         Route::get('/kriteria', 'KriteriaController@kriteriaPage')->name('kriteria.show');
