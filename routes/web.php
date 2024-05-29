@@ -34,9 +34,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/penilaian/delete', 'PenilaianController@deletePenilaian')->name('penilaian.delete');
         Route::get('/penilaian/getdata/{id}', 'PenilaianController@getData')->name('penilaian.getdata');
         Route::get('/penilaian/hasilperhitungan/{role}', 'PenilaianController@hasilPerhitungan')->name('penilaian.hasilperhitungan');
-        Route::get('/penilaian/hasilperhitungan/{role}/export/topsis', 'PenilaianController@exportTopsis')->name('penilaian.exportTopsis');
         Route::get('/penilaian/hasilakhir/{role}', 'PenilaianController@hasilAkhir')->name('penilaian.hasilakhir');
-
+        
+        Route::get('/penilaian/hasilperhitungan/{role}/export/topsis', 'PenilaianController@exportTopsis')->name('penilaian.exportTopsis');
+        Route::get('/penilaian/hasilperhitungan/{role}/export/borda', 'PenilaianController@exportBorda')->name('penilaian.exportBorda');
         // Routes untuk role marketing
         Route::group(['middleware' => ['userRoles:marketing']], function () {
             Route::get('/user', 'UserController@userPage')->name('user.show');

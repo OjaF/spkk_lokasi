@@ -8,22 +8,34 @@
 <div class="flex flex-col gap-5">
     <div class="flex flex-col gap-5">
         {{-- Header --}}
-        <div class="flex gap-2">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="#FFFFFF"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="#0B8C07"
-                class="h-8 w-8"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
-                />
-            </svg>
-            <h1 class="text-2xl font-semibold">Hasil Penilaian Akhir</h1>
+        <div class="flex justify-between gap-2">
+            <div class="flex gap-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#FFFFFF"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#0B8C07"
+                    class="h-8 w-8"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
+                    />
+                </svg>
+                <h1 class="text-2xl font-semibold">Hasil Penilaian Akhir</h1>
+            </div>
+            <div>
+                <a href="{{ route('penilaian.exportBorda', ['role' => Auth::user()->role]) }}" class="flex bg-secondary hover:bg-primary text-white font-bold p-2 px-3 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="h-6 w-6 p-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>                  
+                    <p>
+                        Export
+                    </p>
+                </a>
+            </div>
         </div>
     
         @if ($errors->any())

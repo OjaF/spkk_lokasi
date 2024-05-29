@@ -50,35 +50,27 @@
     </style>
 </head>
 <body>
-    <p class="title">Hasil Perhitungan Topsis - {{ $role }}</p>
+    <p class="title">Hasil Akhir - Perhitungan Borda</p>
 
     <table class="table">
         <thead class="table-head">
             <tr>
-                <th scope="col">Kode</th>
                 <th scope="col">Alternatif</th>
-                <th scope="col">Kriteria</th>
-                <th scope="col">Preferensi</th>
+                <th scope="col">Nilai Borda</th>
                 <th scope="col">Ranking</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"] as $key => $item)
-            @if ($dataTambahan["rank"][$key] == 1)
-                <tr id="one">
-            @else
-                <tr>
-            @endif
-                    <td class="px-6 py-1">{{ $item->kode }}</td>
-                    <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
-                    <td class="px-6 py-1">
-                        @foreach ($dataTambahan["penilaianName"][$key]->penilaianName as $name)
-                            <p class="text-left">{{$name->nama_kriteria}} ({{ $name->subkriteria }})</p>
-                        @endforeach
-                    </td>
-                    <td class="px-6 py-1">{{ number_format((float)$dataTambahan["nilai_preferensi"][$key], 4, '.', '') }}</td>
-                    <td class="px-6 py-1">{{ $dataTambahan["rank"][$key] }}</td>
-                </tr>
+            @foreach ($hasil as $key => $item)
+                @if ($item["rank_borda"] == 1)
+                    <tr id="one">
+                @else
+                    <tr>
+                @endif
+                        <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
+                        <td class="px-6 py-1">{{ number_format((float)$item["nilai_borda"], 4, '.', '') }}</td>
+                        <td class="px-6 py-1">{{ $item["rank_borda"] }}</td>
+                    </tr>
             @endforeach
         </tbody>
     </table>
