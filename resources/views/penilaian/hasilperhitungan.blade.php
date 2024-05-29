@@ -15,7 +15,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="#0B8C07"
-                class="h-8 w-8"
+                class="h-8 w-8 stroke-primary"
             >
                 <path
                     stroke-linecap="round"
@@ -423,7 +423,7 @@
             </div>
         </div>
 
-        <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full">
+        <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full mb-8">
             <div class="flex gap-2 p-2 py-1 ">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -463,7 +463,7 @@
                                     <td class="px-6 py-1">{{ $item["nama_alternatif"] }}</td>
                                     <td class="px-6 py-1">
                                         @foreach ($dataTambahan["penilaianName"][$key]["penilaianName"] as $name)
-                                            <p class="text-left">{{ $name->subkriteria }}</p>
+                                            <p class="text-left">{{$name->nama_kriteria}} ({{ $name->subkriteria }})</p>
                                         @endforeach
                                     </td>
                                     <td class="px-6 py-1">{{ number_format((float)$dataTambahan["nilai_preferensi"][$key], 4, '.', '') }}</td>

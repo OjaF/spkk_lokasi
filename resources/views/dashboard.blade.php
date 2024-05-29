@@ -7,7 +7,7 @@
 @section('content')
 <div class="flex flex-col gap-5 h-full pb-16">
     <div class="flex gap-2">
-        <svg class="h-8 w-8" fill="none" stroke="#0B8C07" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <svg class="h-8 w-8 stroke-black" fill="none" stroke="#0B8C07" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -282,7 +282,7 @@
                           }
                         },
                       }), {
-                        colors: ['#0B8C07'],
+                        colors: ['#4E6441'],
                         xaxis: {
                           labels: {
                             style: {
@@ -301,23 +301,23 @@
                           borderColor: '#e5e7eb'
                         }
                       }, {
-                        colors: ['#3b82f6'],
+                        colors: ['#4E6441'],
                         xaxis: {
                           labels: {
                             style: {
-                              colors: '#a3a3a3',
+                              colors: '#4E6441',
                             }
                           }
                         },
                         yaxis: {
                           labels: {
                             style: {
-                              colors: '#a3a3a3'
+                              colors: '#4E6441'
                             }
                           }
                         },
                         grid: {
-                          borderColor: '#404040'
+                          borderColor: '#4E6441'
                         }
                       });
                     })();

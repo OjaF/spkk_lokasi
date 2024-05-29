@@ -14,7 +14,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="#0B8C07"
-                class="h-8 w-8"
+                class="h-8 w-8 fill-primary stroke-primary"
             >
                 <path
                     stroke-linecap="round"

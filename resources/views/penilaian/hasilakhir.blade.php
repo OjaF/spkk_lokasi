@@ -16,7 +16,7 @@
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="#0B8C07"
-                    class="h-8 w-8"
+                    class="h-8 w-8 stroke-primary"
                 >
                     <path
                         stroke-linecap="round"
@@ -158,7 +158,7 @@
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="#0B8C07"
-                    class="h-8 w-8"
+                    class="h-8 w-8 stroke-primary"
                 >
                     <path
                         stroke-linecap="round"
@@ -319,7 +319,7 @@
             </div>
         </div>
 
-        <div class="flex flex-col gap-5 bg-white">
+        <div class="flex flex-col gap-5 bg-white mb-8">
             <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full">
                 <div class="flex gap-2 p-2 py-1 ">
                     <svg

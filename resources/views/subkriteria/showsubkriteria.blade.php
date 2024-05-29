@@ -14,7 +14,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="#0B8C07"
-                class="h-8 w-8"
+                class="h-8 w-8 stroke-primary"
             >
                 <path
                     stroke-linecap="round"
@@ -136,8 +136,8 @@
                             <thead class="border-b border-neutral-200 bg-secondary font-medium text-white">
                                 <tr>
                                     <th scope="col" class="px-6 py-2">Nama Sub-Kriteria</th>
-                                    <th scope="col" class="px-6 py-2">Nilai</th>
-                                    <th scope="col" class="px-6 py-2">Action</th>
+                                    <th scope="col" class="px-6 py-2 w-24">Nilai</th>
+                                    <th scope="col" class="px-6 py-2 w-24">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

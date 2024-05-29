@@ -19,11 +19,9 @@
                     <div class="flex gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            fill="#FFFFFF"
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
-                            stroke="#0B8C07"
-                            class="h-6 w-6"
+                            class="h-6 w-6 fill-primary stroke-white"
                         >
                             <path
                                 stroke-linecap="round"

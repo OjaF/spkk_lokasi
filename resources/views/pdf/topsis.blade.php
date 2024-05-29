@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
         .bg-primary {
-            background-color: #0B8C07;
+            background-color: #4E6441;
             color: white;
             padding: 10px;
             border-radius: 5px;
@@ -20,7 +20,7 @@
         }
 
         .table-head {
-            background-color: #0B8C07;
+            background-color: #4E6441;
             color: white;
         }
 
