@@ -124,9 +124,10 @@
                         <table class="text-surface min-w-full text-start text-xs font-light">
                             <thead class="border-b border-neutral-200 font-medium">
                                 <tr>
-                                    <th scope="col" class="px-6 py-1">Alternatif</th>
-                                    <th scope="col" class="px-6 py-1">Nilai Borda</th>
-                                    <th scope="col" class="px-6 py-1">Rangking</th>
+                                    <th scope="col" class="border-r px-6 py-1 w-48">Alternatif</th>
+                                    <th scope="col" class="border-r px-6 py-1">Keterangan</th>
+                                    <th scope="col" class="border-r px-6 py-1 w-24">Nilai Borda</th>
+                                    <th scope="col" class="px-6 py-1 w-24">Rangking</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -136,9 +137,10 @@
                                 @else
                                     <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
                                 @endif
-                                        <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
-                                        <td class="px-6 py-1">{{ number_format((float)$item["nilai_borda"], 4, '.', '') }}</td>
-                                        <td class="px-6 py-1">{{ $item["rank_borda"] }}</td>
+                                        <td class="px-6 py-1 text-left border-r ">{{ $item->nama_alternatif }}</td>
+                                        <td class="px-6 py-1 text-left border-r ">{{ $item->keterangan }}</td>
+                                        <td class="px-6 py-1 border-r ">{{ number_format((float)$item["nilai_borda"], 4, '.', '') }}</td>
+                                        <td class="px-6 py-1 border-r ">{{ $item["rank_borda"] }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
