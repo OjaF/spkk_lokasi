@@ -130,7 +130,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($hasil as $key => $item)
+                                @foreach ($hasil_sort as $key => $item)
                                 @if ($item["rank_borda"] == 1)
                                     <tr class="border-b border-neutral-200 text-center bg-green-100 hover:bg-green-100 font-bold">
                                 @else

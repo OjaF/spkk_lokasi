@@ -29,10 +29,12 @@
             padding-left: 10px;
             padding-top: 6px;
             padding-bottom: 6px;
+            padding-right: 10px;
         }
 
         td {
             padding-left: 10px;
+            padding-right: 10px;
             border: 1px solid #ddd;
         }
 
@@ -63,21 +65,21 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"] as $key => $item)
+            @foreach ($matriks["final"] as $key => $item)
             @if ($dataTambahan["rank"][$key] == 1)
                 <tr id="one">
             @else
                 <tr>
             @endif
-                    <td class="px-6 py-1">{{ $item->kode }}</td>
-                    <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
+                    <td class="px-6 py-1">{{ $item["kode"] }}</td>
+                    <td class="px-6 py-1">{{ $item["nama_alternatif"] }}</td>
                     <td class="px-6 py-1">
-                        @foreach ($dataTambahan["penilaianName"][$key]->penilaianName as $name)
+                        @foreach ($dataTambahan["penilaianName"][$key]["penilaianName"] as $name)
                             <p class="text-left">{{$name->nama_kriteria}} ({{ $name->subkriteria }})</p>
                         @endforeach
                     </td>
-                    <td class="px-6 py-1">{{ number_format((float)$dataTambahan["nilai_preferensi"][$key], 4, '.', '') }}</td>
-                    <td class="px-6 py-1">{{ $dataTambahan["rank"][$key] }}</td>
+                    <td style="text-align: center">{{ number_format((float)$dataTambahan["nilai_preferensi"][$key], 4, '.', '') }}</td>
+                    <td style="text-align: center">{{ $dataTambahan["rank"][$key] }}</td>
                 </tr>
             @endforeach
         </tbody>

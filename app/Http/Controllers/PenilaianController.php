@@ -359,9 +359,14 @@ class PenilaianController extends Controller
 
         try {
             $result = $this->getPenilaianTopsis($role);
+
             $matriks = $result['matriks'];
+            $matriks["final"] = $matriks["matriks_normalisasi_alternatif_terbobot"]->toArray();
             $dataTambahan = $result['dataTambahan'];
+            $dataTambahan['penilaianName'] = $dataTambahan["penilaianName"]->toArray();
+            array_multisort($dataTambahan['rank'], $dataTambahan["nilai_preferensi"], $dataTambahan["penilaianName"], $matriks["final"]);
         } catch (\Throwable $th) {
+            dd($th);
             return view('penilaian.hasilperhitungan', ['allgreen' => false])->withErrors(['error' => 'Data penilaian belum lengkap']);
         }
         
@@ -392,6 +397,7 @@ class PenilaianController extends Controller
 
         try {
             $hasil = $this->getPenilaianBorda();
+            $hasil_sorted = $hasil->sortBy('rank_borda');
 
             $dataTopsis = [];
             $dataTopsis['marketing'] = $this->getHasilTopsis('marketing');
@@ -401,20 +407,24 @@ class PenilaianController extends Controller
             return view('penilaian.hasilperhitungan', ['allgreen' => false])->withErrors(['error' => 'Data penilaian belum lengkap']);
         }
 
-        return view('penilaian.hasilakhir', ['allgreen' => $allgreen, 'hasil' => $hasil, 'dataTopsis' => $dataTopsis]);
+        return view('penilaian.hasilakhir', ['allgreen' => $allgreen, 'hasil' => $hasil, 'hasil_sort' => $hasil_sorted ,'dataTopsis' => $dataTopsis]);
     }
 
     public function exportTopsis($role) {
         $result = $this->getPenilaianTopsis($role);
 
         $matriks = $result['matriks'];
+        $matriks["final"] = $matriks["matriks_normalisasi_alternatif_terbobot"]->toArray();
         $dataTambahan = $result['dataTambahan'];
+        $dataTambahan['penilaianName'] = $dataTambahan["penilaianName"]->toArray();
+        array_multisort($dataTambahan['rank'], $dataTambahan["nilai_preferensi"], $dataTambahan["penilaianName"], $matriks["final"]);
+
         $pdf = Pdf::loadView('pdf.topsis', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'now' => Carbon::now(), 'role' => $role])->setPaper('a4');
         return $pdf->download('topsis.pdf');
     }
 
     public function exportBorda($role) {
-        $result = $this->getPenilaianBorda($role);
+        $result = $this->getPenilaianBorda($role)->sortBy('rank_borda');
         $pdf = Pdf::loadView('pdf.borda', ['hasil' => $result, 'now' => Carbon::now()])->setPaper('a4');
         
         return $pdf->download('borda.pdf');
