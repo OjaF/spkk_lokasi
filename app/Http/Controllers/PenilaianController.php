@@ -11,6 +11,8 @@ use App\Models\Kriteria;
 use App\Models\SubKriteria;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class PenilaianController extends Controller
 {
@@ -400,5 +402,14 @@ class PenilaianController extends Controller
         }
 
         return view('penilaian.hasilakhir', ['allgreen' => $allgreen, 'hasil' => $hasil, 'dataTopsis' => $dataTopsis]);
-    } 
+    }
+
+    public function exportTopsis($role) {
+        $result = $this->getPenilaianTopsis($role);
+
+        $matriks = $result['matriks'];
+        $dataTambahan = $result['dataTambahan'];
+        $pdf = Pdf::loadView('pdf.topsis', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'now' => Carbon::now(), 'role' => Auth::user()->role])->setPaper('a4', 'landscape');
+        return $pdf->download('topsis.pdf');
+    }
 }
