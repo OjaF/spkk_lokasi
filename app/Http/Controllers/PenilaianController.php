@@ -409,14 +409,13 @@ class PenilaianController extends Controller
 
         $matriks = $result['matriks'];
         $dataTambahan = $result['dataTambahan'];
-        $pdf = Pdf::loadView('pdf.topsis', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'now' => Carbon::now(), 'role' => $role])->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('pdf.topsis', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'now' => Carbon::now(), 'role' => $role])->setPaper('a4');
         return $pdf->download('topsis.pdf');
     }
 
     public function exportBorda($role) {
         $result = $this->getPenilaianBorda($role);
-
-        $pdf = Pdf::loadView('pdf.borda', ['hasil' => $result, 'now' => Carbon::now()])->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('pdf.borda', ['hasil' => $result, 'now' => Carbon::now()])->setPaper('a4');
         
         return $pdf->download('borda.pdf');
     }

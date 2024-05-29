@@ -29,10 +29,12 @@
             padding-left: 10px;
             padding-top: 6px;
             padding-bottom: 6px;
+            padding-right: 10px;
         }
 
         td {
             padding-left: 10px;
+            padding-right: 10px;
             border: 1px solid #ddd;
         }
 
@@ -56,6 +58,7 @@
         <thead class="table-head">
             <tr>
                 <th scope="col">Alternatif</th>
+                <th scope="col">Keterangan</th>
                 <th scope="col">Nilai Borda</th>
                 <th scope="col">Ranking</th>
             </tr>
@@ -68,8 +71,9 @@
                     <tr>
                 @endif
                         <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
-                        <td class="px-6 py-1">{{ number_format((float)$item["nilai_borda"], 4, '.', '') }}</td>
-                        <td class="px-6 py-1">{{ $item["rank_borda"] }}</td>
+                        <td class="px-6 py-1">{{ $item->keterangan }}</td>
+                        <td style="text-align: center">{{ number_format((float)$item["nilai_borda"], 4, '.', '') }}</td>
+                        <td style="text-align: center">{{ $item["rank_borda"] }}</td>
                     </tr>
             @endforeach
         </tbody>

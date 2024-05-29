@@ -450,7 +450,7 @@
                                 <th scope="col" class="px-6 py-1">Alternatif</th>
                                 <th scope="col" class="px-6 py-1">Kriteria</th>
                                 <th scope="col" class="px-6 py-1">Preferensi</th>
-                                <th scope="col" class="px-6 py-1">Rangking</th>
+                                <th scope="col" class="px-6 py-1">Ranking</th>
                             </tr>
                         </thead>
                         <tbody>
