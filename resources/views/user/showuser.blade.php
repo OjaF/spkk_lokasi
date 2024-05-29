@@ -159,7 +159,7 @@
 
                 <div class="flex flex-col gap-5">
                     <table class="text-surface min-w-full text-start text-sm font-light">
-                        <thead class="border-b border-neutral-200 bg-primary font-medium text-white">
+                        <thead class="border border-neutral-200 bg-primary font-medium text-white">
                             <tr>
                                 <th scope="col" class="px-6 py-2">Nama</th>
                                 <th scope="col" class="px-6 py-2">Username</th>
@@ -169,11 +169,11 @@
                         </thead>
                         <tbody>
                             @foreach ($dataUser as $item)
-                                <tr class="border-b border-neutral-200 hover:bg-primary/10">
-                                    <td class="whitespace-nowrap px-6 py-2 font-medium">{{ $item->name }}</td>
-                                    <td class="whitespace-nowrap px-6 py-2">{{ $item->username }}</td>
-                                    <td class="whitespace-nowrap px-6 py-2">{{ $item->role }}</td>
-                                    <td class="whitespace-nowrap px-6 py-2">
+                                <tr class="border border-neutral-200 hover:bg-primary/10">
+                                    <td class="whitespace-nowrap px-6 py-2 font-medium border-r">{{ $item->name }}</td>
+                                    <td class="whitespace-nowrap px-6 py-2 border-r">{{ $item->username }}</td>
+                                    <td class="whitespace-nowrap px-6 py-2 border-r">{{ $item->role }}</td>
+                                    <td class="whitespace-nowrap px-6 py-2 border-r">
                                         <form
                                             id="delete-{{ $item->id }}"
                                             action="{{ route('user.delete') }}"

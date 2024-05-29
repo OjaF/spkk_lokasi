@@ -161,10 +161,10 @@
                     <table class="text-surface min-w-full text-start text-sm font-light">
                         <thead class="border-b border-neutral-200 bg-secondary font-medium text-white">
                             <tr>
-                                <th scope="col" class="px-6 py-2">Kode Alternatif</th>
+                                <th scope="col" class="px-6 py-2 w-24">Kode Alternatif</th>
                                 <th scope="col" class="px-6 py-2">Nama Alternatif</th>
                                 <th scope="col" class="px-6 py-2">Keterangan</th>
-                                <th scope="col" class="px-6 py-2">Action</th>
+                                <th scope="col" class="px-6 py-2 w-24">Action</th>
                             </tr>
                         </thead>
                         <tbody>

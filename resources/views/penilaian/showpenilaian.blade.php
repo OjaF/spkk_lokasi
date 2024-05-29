@@ -141,7 +141,7 @@
                                 <th scope="col" class="px-6 py-2">Nama Alternatif</th>
                                 <th scope="col" class="px-6 py-2">Keterangan</th>
                                 <th scope="col" class="px-6 py-2">Status</th>
-                                <th scope="col" class="px-6 py-2">Action</th>
+                                <th scope="col" class="px-6 py-2 w-24">Action</th>
                             </tr>
                         </thead>
                         <tbody>

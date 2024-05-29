@@ -161,11 +161,11 @@
                     <table class="text-surface min-w-full text-start text-sm font-light">
                         <thead class="border-b border-neutral-200 bg-secondary font-medium text-white">
                             <tr>
-                                <th scope="col" class="px-6 py-2">Kode</th>
+                                <th scope="col" class="px-6 py-2 w-24">Kode</th>
                                 <th scope="col" class="px-6 py-2">Nama Kriteria</th>
-                                <th scope="col" class="px-6 py-2">Bobot</th>
-                                <th scope="col" class="px-6 py-2">Atribut</th>
-                                <th scope="col" class="px-6 py-2">Action</th>
+                                <th scope="col" class="px-6 py-2 w-24">Bobot</th>
+                                <th scope="col" class="px-6 py-2 w-24">Atribut</th>
+                                <th scope="col" class="px-6 py-2 w-24">Action</th>
                             </tr>
                         </thead>
                         <tbody>
