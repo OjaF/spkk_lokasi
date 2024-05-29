@@ -260,7 +260,24 @@ class PenilaianController extends Controller
             $dataKriteria[$key]->subkriteria = SubKriteria::where('id_kriteria', $kriteria->id)->orderByDesc('nilai')->get();
         }
 
-        return view('penilaian.detailpenilaian', ['dataKriteria' => $dataKriteria, 'alternatif' => $alternatif]);
+        // Get penilaian
+        $penilaian = Penilaian::where('id_alternatif', $id)->where('role', Auth::user()->role)->get();
+
+        return view('penilaian.detailpenilaian', ['dataKriteria' => $dataKriteria, 'alternatif' => $alternatif, 'penilaian' => $penilaian]);
+    }
+
+    public function penilaianEditPage($id) {
+        $alternatif = Alternatif::where('id', $id)->first();
+        $dataKriteria = Kriteria::where('role', Auth::user()->role)->get();
+
+        foreach ($dataKriteria as $key => $kriteria) {
+            $dataKriteria[$key]->subkriteria = SubKriteria::where('id_kriteria', $kriteria->id)->orderByDesc('nilai')->get();
+        }
+
+        // Get penilaian
+        $penilaian = Penilaian::where('id_alternatif', $id)->where('role', Auth::user()->role)->get();
+
+        return view('penilaian.editpenilaian', ['dataKriteria' => $dataKriteria, 'alternatif' => $alternatif, 'penilaian' => $penilaian]);
     }
 
     public function createPenilaian(StorePenilaianRequest $request)
@@ -295,9 +312,10 @@ class PenilaianController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+            return redirect()->route('penilaian.show')->withErrors(['error' => 'Penilaian gagal ditambahkan']);
         }
 
-        return redirect()->route('penilaian.show');
+        return redirect()->route('penilaian.show')->with('success', 'Penilaian berhasil ditambahkan');
     }
 
     public function deletePenilaian(StorePenilaianRequest $request)
@@ -311,9 +329,26 @@ class PenilaianController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+            return redirect()->route('penilaian.show')->withErrors(['error' => 'Penilaian gagal dihapus']);
             //throw $th
         }
-        return redirect()->route('penilaian.show');
+        return redirect()->route('penilaian.show')->with('success', 'Penilaian berhasil dihapus');
+    }
+
+    public function updatePenilaian(Request $request) {
+        
+        try {
+            $penilaian = Penilaian::where('id_alternatif', $request->id_alternatif)->where('role', Auth::user()->role)->get();
+
+            foreach ($penilaian as $key => $value) {
+                $value->nilai = $request[$value->id_kriteria];
+                $value->save();
+            }
+        } catch (\Throwable $th) {
+            return redirect()->route('penilaian.show')->withErrors(['error' => 'Penilaian gagal dirubah']);
+        }
+
+        return redirect()->route('penilaian.show')->with('success', 'Penilaian berhasil dirubah');
     }
 
     public function getData($id)

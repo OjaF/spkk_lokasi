@@ -30,8 +30,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Routes untuk penilaian
         Route::get('/penilaian', 'PenilaianController@penilaianPage')->name('penilaian.show');
         Route::get('/penilaian/{id}', 'PenilaianController@penilaianDetailPage')->name('penilaian.detail');
+        Route::get('/penilaian/{id}/edit', 'PenilaianController@penilaianEditPage')->name('penilaian.edit');
         Route::post('/penilaian/create', 'PenilaianController@createPenilaian')->name('penilaian.create');
         Route::post('/penilaian/delete', 'PenilaianController@deletePenilaian')->name('penilaian.delete');
+        Route::post('/penilaian/update', 'PenilaianController@updatePenilaian')->name('penilaian.update');
         Route::get('/penilaian/getdata/{id}', 'PenilaianController@getData')->name('penilaian.getdata');
         Route::get('/penilaian/hasilperhitungan/{role}', 'PenilaianController@hasilPerhitungan')->name('penilaian.hasilperhitungan');
         Route::get('/penilaian/hasilakhir/{role}', 'PenilaianController@hasilAkhir')->name('penilaian.hasilakhir');
