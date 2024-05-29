@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <title>SPK - Tanah</title>
+        <title>SPK - Lokasi</title>
 
         {{-- Tailwind --}}
         @vite('resources/css/app.css')
