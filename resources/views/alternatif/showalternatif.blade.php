@@ -26,7 +26,7 @@
         </div>
 
         @if ($errors->any())
-            <div class="flex justify-between gap-2 rounded-md border border-red-200 bg-red-100 p-2 text-red-400">
+            <div id="notif" class="flex justify-between gap-2 rounded-md border border-red-200 bg-red-100 p-2 text-red-400">
                 <div class="flex gap-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -54,10 +54,15 @@
                     </span>
                 --}}
             </div>
+            <script>
+                setTimeout(() => {
+                    document.getElementById('notif').style.display = 'none';
+                }, 5000);
+            </script>
         @endif
 
         @if (Session::has('success'))
-            <div class="flex justify-between gap-2 rounded-md border border-green-200 bg-green-100 p-2 text-green-400">
+            <div id="notif" class="flex justify-between gap-2 rounded-md border border-green-200 bg-green-100 p-2 text-green-400">
                 <div class="flex gap-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -83,6 +88,11 @@
                     </span>
                 --}}
             </div>
+            <script>
+                setTimeout(() => {
+                    document.getElementById('notif').style.display = 'none';
+                }, 5000);
+            </script>
         @endif
 
         <div class="flex flex-col rounded-md border bg-secondary">
