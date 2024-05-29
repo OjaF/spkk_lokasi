@@ -133,6 +133,24 @@ class PenilaianController extends Controller
         $dataTambahan["nilai_preferensi"] = $nilaiPreferensi;
         $dataTambahan["rank"] = $this->calculate_rank($nilaiPreferensi);
 
+        foreach ($dataAlternatif as $key => $alternatif) {
+            $data = DB::table('penilaians')
+                    ->leftJoin('kriterias', 'penilaians.id_kriteria', '=', 'kriterias.id')
+                    ->where('id_alternatif', $alternatif->id)->where('penilaians.role', Auth::user()->role)->get(["id_kriteria","nama_kriteria", "nilai"]);
+
+            foreach ($data as $penilaian) {
+                $datasubkriteria = DB::table('sub_kriterias')
+                                    ->where('id_kriteria', $penilaian->id_kriteria)
+                                    ->where('nilai', $penilaian->nilai)
+                                    ->first();
+                $penilaian->subkriteria = $datasubkriteria->nama_subkriteria;
+            }
+
+            $alternatif->penilaianName = $data;
+        }
+
+        $dataTambahan["penilaianName"] = unserialize(serialize($dataAlternatif));
+
         $result = [
             'matriks' => $matriks,
             'dataTambahan' => $dataTambahan

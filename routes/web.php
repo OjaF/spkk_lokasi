@@ -36,7 +36,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/penilaian/hasilperhitungan/{role}', 'PenilaianController@hasilPerhitungan')->name('penilaian.hasilperhitungan');
         Route::get('/penilaian/hasilakhir/{role}', 'PenilaianController@hasilAkhir')->name('penilaian.hasilakhir');
 
-
         // Routes untuk role marketing
         Route::group(['middleware' => ['userRoles:marketing']], function () {
             Route::get('/user', 'UserController@userPage')->name('user.show');
