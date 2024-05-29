@@ -49,7 +49,6 @@ class KriteriaController extends Controller
 
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
             Db::rollback();
             return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan, Kriteria gagal ditambahkan']);
         }

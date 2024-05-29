@@ -17,7 +17,6 @@ class DashboardController extends Controller
         try {
             $penilaian = new PenilaianController();
             $hasil = $penilaian->getPenilaianBorda();
-            // dd($hasil);
 
             $nama = [];
             $rank = [];
@@ -43,7 +42,6 @@ class DashboardController extends Controller
         $data["subkriteria"] = SubKriteria::where('role', Auth::user()->role)->count();
         $data["alternatif"] =  Alternatif::all()->count();
 
-        // dd($hasil);
         return view('dashboard', ['rank' => $hasil, 'data' => $data]);
     }
 }

@@ -295,7 +295,6 @@ class PenilaianController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
         }
 
         return redirect()->route('penilaian.show');
@@ -312,7 +311,6 @@ class PenilaianController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             //throw $th
         }
         return redirect()->route('penilaian.show');
@@ -366,7 +364,6 @@ class PenilaianController extends Controller
             $dataTambahan['penilaianName'] = $dataTambahan["penilaianName"]->toArray();
             array_multisort($dataTambahan['rank'], $dataTambahan["nilai_preferensi"], $dataTambahan["penilaianName"], $matriks["final"]);
         } catch (\Throwable $th) {
-            dd($th);
             return view('penilaian.hasilperhitungan', ['allgreen' => false])->withErrors(['error' => 'Data penilaian belum lengkap']);
         }
         

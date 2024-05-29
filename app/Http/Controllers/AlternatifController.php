@@ -43,7 +43,6 @@ class AlternatifController extends Controller
             ]);
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             return redirect()->back()->withErrors('error', 'Gagal menambahkan alternatif');
         }
@@ -67,7 +66,6 @@ class AlternatifController extends Controller
             $alternatif->delete();
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             return redirect()->back()->withErrors('error', 'Gagal menghapus alternatif');
         }
@@ -96,7 +94,6 @@ class AlternatifController extends Controller
             ]);
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             return redirect()->back()->withErrors('error', 'Gagal mengupdate alternatif');
         }
