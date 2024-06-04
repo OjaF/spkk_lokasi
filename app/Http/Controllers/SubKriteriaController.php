@@ -17,10 +17,18 @@ class SubKriteriaController extends Controller
      * */
     public function subkriteriaPage()
     {
-        $dataKriteria = Kriteria::where('role', Auth::user()->role)->get();
+        if (Auth::user()->role == "admin"){
+            $dataKriteria = Kriteria::all();
 
-        foreach ($dataKriteria as $key => $kriteria) {
-            $dataKriteria[$key]->subkriteria = SubKriteria::where('id_kriteria', $kriteria->id)->orderByDesc('nilai')->get();
+            foreach ($dataKriteria as $key => $kriteria) {
+                $dataKriteria[$key]->subkriteria = SubKriteria::where('id_kriteria', $kriteria->id)->orderByDesc('nilai')->get();
+            }
+        }else{
+            $dataKriteria = Kriteria::where('role', Auth::user()->role)->get();
+
+            foreach ($dataKriteria as $key => $kriteria) {
+                $dataKriteria[$key]->subkriteria = SubKriteria::where('id_kriteria', $kriteria->id)->orderByDesc('nilai')->get();
+            }
         }
 
         return view('subkriteria.showsubkriteria', ['dataKriteria' => $dataKriteria]);
