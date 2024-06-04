@@ -24,7 +24,7 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => 'required',
             'username' => 'required|unique:users',
-            'role' => 'required|in:marketing,finance,stakeholder',
+            'role' => 'required|in:marketing,finance,stakeholder,admin',
             'password' => 'required|min:8',
         ];
     }

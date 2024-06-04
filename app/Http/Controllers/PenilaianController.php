@@ -350,6 +350,24 @@ class PenilaianController extends Controller
 
         return redirect()->route('penilaian.show')->with('success', 'Penilaian berhasil dirubah');
     }
+    
+    public function getDataAdmin($role ,$id){
+        $data = DB::table('penilaians')
+                    ->leftJoin('kriterias', 'penilaians.id_kriteria', '=', 'kriterias.id')
+                    ->where('id_alternatif', $id)->where('penilaians.role', $role)->get(["id_kriteria","nama_kriteria", "nilai"]);
+
+        foreach ($data as $penilaian) {
+            $datasubkriteria = DB::table('sub_kriterias')
+                                ->where('id_kriteria', $penilaian->id_kriteria)
+                                ->where('nilai', $penilaian->nilai)
+                                ->first();
+            $penilaian->subkriteria = $datasubkriteria->nama_subkriteria;
+        }
+
+        // dd($data);
+
+        return response()->json($data);
+    }
 
     public function getData($id)
     {

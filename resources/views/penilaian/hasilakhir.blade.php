@@ -151,7 +151,7 @@
         </div>
     </div>
     
-    @if (Auth::user()->role == 'marketing')
+    @if (Auth::user()->role == 'admin')
         <div class="flex flex-col gap-5">
             <div class="flex gap-2">
                 <svg

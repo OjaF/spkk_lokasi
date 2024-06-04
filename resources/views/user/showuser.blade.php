@@ -292,6 +292,7 @@
                                 <option value="marketing">Marketing</option>
                                 <option value="finance">Finance</option>
                                 <option value="stakeholder">Stakeholder</option>
+                                <option value="admin">Admin</option>
                             </select>
                         </div>
 

@@ -41,7 +41,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/penilaian/hasilperhitungan/{role}/export/topsis', 'PenilaianController@exportTopsis')->name('penilaian.exportTopsis');
         Route::get('/penilaian/hasilperhitungan/{role}/export/borda', 'PenilaianController@exportBorda')->name('penilaian.exportBorda');
         // Routes untuk role marketing
-        Route::group(['middleware' => ['userRoles:marketing']], function () {
+        Route::group(['middleware' => ['userRoles:admin']], function () {
             Route::get('/user', 'UserController@userPage')->name('user.show');
             Route::post('/user/delete', 'UserController@deleteUser')->name('user.delete');
             Route::post('/user/create','UserController@createUser')->name('user.create');
@@ -51,6 +51,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::post('/alternatif/add', 'AlternatifController@addAlternatif')->name('alternative.add');
             Route::post('/alternatif/delete', 'AlternatifController@deleteAlternatif')->name('alternative.delete');
             Route::post('/alternatif/update', 'AlternatifController@updateAlternatif')->name('alternative.update');
+
+            Route::get('/penilaian/admin/getdata/{role}/{id}', 'PenilaianController@getDataAdmin')->name('penilaian.getdataadmin');
         });
 
         // Routes untuk role finance

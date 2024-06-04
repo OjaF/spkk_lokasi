@@ -115,7 +115,7 @@
                                 <span class="ml-2 truncate text-sm tracking-wide">Data Sub-kriteria</span>
                             </a>
                         </li>
-                        @if (Auth::user()->role === 'marketing')
+                        @if (Auth::user()->role === 'admin')
                             <li>
                                 <a
                                     href="{{ route('alternative.show') }}"
@@ -219,7 +219,7 @@
                                 <span class="ml-2 truncate text-sm tracking-wide">Hasil Akhir</span>
                             </a>
                         </li>
-                        @if (Auth::user()->role === 'marketing')
+                        @if (Auth::user()->role === 'admin')
                             <li class="px-5">
                                 <div class="flex h-8 flex-row items-center">
                                     <div class="text-sm font-thin tracking-wide text-white">Kelola User</div>

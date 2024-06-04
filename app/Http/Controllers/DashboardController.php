@@ -37,10 +37,17 @@ class DashboardController extends Controller
             $hasil = null;
         }
 
-        $data = [];
-        $data["kriteria"] = Kriteria::where('role', Auth::user()->role)->count();
-        $data["subkriteria"] = SubKriteria::where('role', Auth::user()->role)->count();
-        $data["alternatif"] =  Alternatif::all()->count();
+        if (Auth::user()->role == 'admin') {
+            $data = [];
+            $data["kriteria"] = Kriteria::all()->count();
+            $data["subkriteria"] = SubKriteria::all()->count();
+            $data["alternatif"] =  Alternatif::all()->count();
+        } else {
+            $data = [];
+            $data["kriteria"] = Kriteria::where('role', Auth::user()->role)->count();
+            $data["subkriteria"] = SubKriteria::where('role', Auth::user()->role)->count();
+            $data["alternatif"] =  Alternatif::all()->count();
+        }
 
         return view('dashboard', ['rank' => $hasil, 'data' => $data]);
     }

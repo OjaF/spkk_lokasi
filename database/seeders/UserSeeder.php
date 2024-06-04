@@ -40,5 +40,14 @@ class UserSeeder extends Seeder
                 'role' => 'stakeholder'
             ]
         );
+
+        User::create(
+            [
+                'name' => 'Admin',
+                'username' => 'admin',
+                'password'=> 'admin',
+                'role' => 'admin'
+            ]
+        );
     }
 }

@@ -636,7 +636,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `username`, `role`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Marketing', 'marketing', 'marketing', '$2y$12$HrFN7/W.ubgZvVkZUMnHcer53IRQpvmJdUoaNbf5GFe.uxuIUKyRm', NULL, '2024-05-14 02:50:18', '2024-05-15 10:59:25'),
 (2, 'Finance', 'finance', 'finance', '$2y$12$twamFSA6z26WqFmqPvlJlugqonxJdYCGzRBW4DMWD5M2TCGX0dGc6', NULL, '2024-05-14 02:50:18', '2024-05-14 02:50:18'),
-(3, 'Stakeholder', 'stakeholder', 'stakeholder', '$2y$12$KPHpWnjHhgqu0pjji8atceKTLlY9jDN/nOCN8irZGHOqnHIx3RQ0G', NULL, '2024-05-14 02:50:18', '2024-05-14 02:50:18');
+(3, 'Stakeholder', 'stakeholder', 'stakeholder', '$2y$12$KPHpWnjHhgqu0pjji8atceKTLlY9jDN/nOCN8irZGHOqnHIx3RQ0G', NULL, '2024-05-14 02:50:18', '2024-05-14 02:50:18'),
+(4, 'Admin', 'admin', 'admin', '$2y$12$KPHpWnjHhgqu0pjji8atceKTLlY9jDN/nOCN8irZGHOqnHIx3RQ0G', NULL, '2024-05-14 02:50:18', '2024-05-14 02:50:18');
 
 --
 -- Indexes for dumped tables
