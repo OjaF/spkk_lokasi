@@ -117,29 +117,34 @@
 
             <div class="flex flex-col gap-5 bg-white p-2">
                 <div class="flex w-full justify-between py-2">
-                    <button
-                        data-modal-target="main-modal"
-                        data-modal-toggle="main-modal"
-                        class="flex gap-1 rounded-md bg-secondary p-1 px-2 font-semibold text-white hover:bg-primary"
-                        type="button"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="h-6 w-6"
+                    @if (Auth::user()->role != 'admin')
+                        <button
+                            data-modal-target="main-modal"
+                            data-modal-toggle="main-modal"
+                            class="flex gap-1 rounded-md bg-secondary p-1 px-2 font-semibold text-white hover:bg-primary"
+                            type="button"
                         >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
-                            />
-                        </svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="h-6 w-6"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
+                                />
+                            </svg>
 
-                        <p>Tambah Kriteria</p>
-                    </button>
+                            <p>Tambah Kriteria</p>
+                        </button>
+                    @else
+                        <div></div>
+                    @endif
+                    
 
                     <form action="{{ route('kriteria.show') }}" method="GET" class="flex justify-end">
                         <input
@@ -173,6 +178,9 @@
                             <tr>
                                 <th scope="col" class="px-6 py-2 w-24">Kode</th>
                                 <th scope="col" class="px-6 py-2">Nama Kriteria</th>
+                                @if (Auth::user()->role == 'admin')
+                                    <th scope="col" class="px-6 py-2 w-24">Role</th>
+                                @endif
                                 <th scope="col" class="px-6 py-2 w-24">Bobot</th>
                                 <th scope="col" class="px-6 py-2 w-24">Atribut</th>
                                 <th scope="col" class="px-6 py-2 w-24">Action</th>
@@ -185,6 +193,9 @@
                                     <td class="whitespace-nowrap px-6 py-2 font-semibold border-r capitalize">
                                         {{ $item->nama_kriteria }}
                                     </td>
+                                    @if (Auth::user()->role == 'admin')
+                                        <td class="whitespace-nowrap px-6 py-2 font-semibold border-r capitalize">{{ $item->role }}</td>
+                                    @endif
                                     <td class="whitespace-nowrap px-6 py-2 font-semibold border-r">{{ $item->bobot }}</td>
                                     <td class="whitespace-nowrap px-6 py-2 font-semibold border-r capitalize">{{ $item->atribut }}</td>
                                     <td class="flex gap-2 whitespace-nowrap px-6 py-2 justify-end">

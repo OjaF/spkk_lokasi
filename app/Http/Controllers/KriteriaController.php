@@ -20,10 +20,13 @@ class KriteriaController extends Controller
             $page = $request->q;
         }
 
-        $dataKriteria = Kriteria::where('role', Auth::user()->role)
-        ->where('nama_kriteria', 'LIKE', '%' . $request->search_query . '%')
-        ->paginate($page);
+        if (Auth::user()->role == 'admin') {
+            $dataKriteria = Kriteria::where('nama_kriteria', 'LIKE', '%' . $request->search_query . '%')->paginate($page);
+        }else {
+            $dataKriteria = Kriteria::where('role', Auth::user()->role)->where('nama_kriteria', 'LIKE', '%' . $request->search_query . '%')->paginate($page);
+        }
 
+        // dd($dataKriteria);
         return view('kriteria.showkriteria', [
             'dataKriteria' => $dataKriteria
         ]);
