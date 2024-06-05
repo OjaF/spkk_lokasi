@@ -98,384 +98,535 @@
     @endif
 
     @if($allgreen == true)
-        {{-- Table --}}
-    <div class="flex flex-col gap-5 bg-white">
-        <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
-            <div class="flex gap-2 p-2 py-1 ">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="white"
-                    class="h-6 w-6"
-                >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                />
-                </svg>
-                <p class="font-semibold capitalize">Matriks Keputusan</p>
-            </div>
-
-            <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
-                <div class="flex flex-col gap-5">
-                    <table class="text-surface min-w-full text-start text-xs font-light">
-                        <thead class="border-b border-neutral-200 font-medium">
-                            <tr>
-                                <th scope="col" class="px-6 py-1">Alternatif</th>
-                                @foreach ($matriks["matriks_nilai_alternatif"][0]["penilaian"] as $item)
-                                    <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
-                                @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($matriks["matriks_nilai_alternatif"] as $item)
-                                <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                    <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
-                                    @foreach ($item->penilaian as $penilaian)
-                                        <td class="px-6 py-1">{{ $penilaian->nilai }}</td>
-                                    @endforeach
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
-            <div class="flex gap-2 p-2 py-1 ">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="white"
-                    class="h-6 w-6"
-                >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                />
-                </svg>
-                <p class="font-semibold capitalize">Matriks Tabel Kuadrat</p>
-            </div>
-
-            <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
-                <div class="flex flex-col gap-5">
-                    <table class="text-surface min-w-full text-start text-xs font-light">
-                        <thead class="border-b border-neutral-200 font-medium">
-                            <tr>
-                                <th scope="col" class="px-6 py-1">Alternatif</th>
-                                @foreach ($matriks["matriks_normalisasi_alternatif_kuadrat"][0]["penilaian"] as $item)
-                                    <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
-                                @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($matriks["matriks_normalisasi_alternatif_kuadrat"] as $item)
-                                <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                    <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
-                                    @foreach ($item->penilaian as $penilaian)
-                                        <td class="px-6 py-1">{{ $penilaian->nilai }}</td>
-                                    @endforeach
-                                </tr>
-                            @endforeach
-                            <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                <td class="px-6 py-1 font-bold">Jumlah</td>
-                                @foreach ($dataTambahan["matriks_normalisasi_alternatif_kuadrat"] as $item)
-                                    <td class="px-6 py-1 font-bold">{{ $item }}</td>
-                                @endforeach
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
-            <div class="flex gap-2 p-2 py-1 ">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="white"
-                    class="h-6 w-6"
-                >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                />
-                </svg>
-                <p class="font-semibold capitalize">Matriks Tabel Normalisasi</p>
-            </div>
-
-            <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
-                <div class="flex flex-col gap-5">
-                    <table class="text-surface min-w-full text-start text-xs font-light">
-                        <thead class="border-b border-neutral-200 font-medium">
-                            <tr>
-                                <th scope="col" class="px-6 py-1">Alternatif</th>
-                                @foreach ($matriks["matriks_normalisasi_alternatif_dibagi_kuadrat"][0]["penilaian"] as $item)
-                                    <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
-                                @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($matriks["matriks_normalisasi_alternatif_dibagi_kuadrat"] as $item)
-                                <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                    <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
-                                    @foreach ($item->penilaian as $penilaian)
-                                        <td class="px-6 py-1">{{ number_format((float)$penilaian->nilai, 4, '.', '') }}</td>
-                                    @endforeach
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
-            <div class="flex gap-2 p-2 py-1 ">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="white"
-                    class="h-6 w-6"
-                >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                />
-                </svg>
-                <p class="font-semibold capitalize">Matriks Tabel Normalisasi Terbobot</p>
-            </div>
-
-            <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
-                <div class="flex flex-col gap-5">
-                    <table class="text-surface min-w-full text-start text-xs font-light">
-                        <thead class="border-b border-neutral-200 font-medium">
-                            <tr>
-                                <th scope="col" class="px-6 py-1">Alternatif</th>
-                                @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"][0]["penilaian"] as $item)
-                                    <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
-                                @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"] as $item)
-                                <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                    <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
-                                    @foreach ($item->penilaian as $penilaian)
-                                        <td class="px-6 py-1">{{ number_format((float)$penilaian->nilai, 4, '.', '') }}</td>
-                                    @endforeach
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
-            <div class="flex gap-2 p-2 py-1 ">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="white"
-                    class="h-6 w-6"
-                >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                />
-                </svg>
-                <p class="font-semibold capitalize">Matriks Tabel Solusi Ideal</p>
-            </div>
-
-            <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
-                <div class="flex flex-col gap-5">
-                    <table class="text-surface min-w-full text-start text-xs font-light">
-                        <thead class="border-b border-neutral-200 font-medium">
-                            <tr>
-                                <th scope="col" class="px-6 py-1">Solusi</th>
-                                @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"][0]["penilaian"] as $item)
-                                    <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
-                                @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                <td class="px-6 py-1">Positif</td>
-                                @foreach ($dataTambahan["solusi_ideal_positif"] as $value)
-                                    <td class="px-6 py-1">{{ number_format((float)$value, 4, '.', '') }}</td>
-                                @endforeach
-                            </tr>
-                            <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                <td class="px-6 py-1">Negatif</td>
-                                @foreach ($dataTambahan["solusi_ideal_negatif"] as $value)
-                                    <td class="px-6 py-1">{{ number_format((float)$value, 4, '.', '') }}</td>
-                                @endforeach
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="flex gap-5 w-full">
-            <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full">
-                <div class="flex gap-2 p-2 py-1 ">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="white"
-                        class="h-6 w-6"
-                    >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                    />
-                    </svg>
-                    <p class="font-semibold capitalize">Matriks Tabel Kuadrat Selisih</p>
-                </div>
-    
-                <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
-                    <div class="flex flex-col gap-5">
-                        <table class="text-surface min-w-full text-start text-xs font-light">
-                            <thead class="border-b border-neutral-200 font-medium">
-                                <tr>
-                                    <th scope="col" class="px-6 py-1">Alternatif</th>
-                                    <th scope="col" class="px-6 py-1">Positif</th>
-                                    <th scope="col" class="px-6 py-1">Negatif</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"] as $key => $item)
-                                    <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                        <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
-                                        <td class="px-6 py-1">{{ number_format((float)$dataTambahan["selisih_solusi_ideal"][$key]["positif"], 4, '.', '') }}</td>
-                                        <td class="px-6 py-1">{{ number_format((float)$dataTambahan["selisih_solusi_ideal"][$key]["negatif"], 4, '.', '') }}</td>
+        @if (Auth::user()->role == "admin")
+        <div class="flex flex-col gap-5 w-full">
+            <div class="flex flex-col gap-5 bg-white w-full">
+                <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full">
+                    <div class="flex gap-2 p-2 py-1 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="h-6 w-6"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                        />
+                        </svg>
+                        <p class="font-semibold capitalize">Hasil Topsis Marketing</p>
+                    </div>
+        
+                    <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                        <div class="flex flex-col gap-5">
+                            <table class="text-surface min-w-full text-start text-xs font-light">
+                                <thead class="border-b border-neutral-200 font-medium">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-1">Alternatif</th>
+                                        <th scope="col" class="px-6 py-1">Nilai Preferensi</th>
+                                        <th scope="col" class="px-6 py-1">Rangking</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($dataTopsis["marketing"] as $key => $item)
+                                    @if ($item["rank"] == 1)
+                                        <tr class="border-b border-neutral-200 text-center bg-green-100 hover:bg-green-100 font-bold">
+                                    @else
+                                        <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                    @endif
+                                            <td class="px-6 py-1">{{ $item["nama_alternatif"] }}</td>
+                                            <td class="px-6 py-1">{{ number_format((float)$item["nilai_preferensi"], 4, '.', '') }}</td>
+                                            <td class="px-6 py-1">{{ $item["rank"] }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full">
-                <div class="flex gap-2 p-2 py-1 ">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="white"
-                        class="h-6 w-6"
-                    >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                    />
-                    </svg>
-                    <p class="font-semibold capitalize">Matriks Tabel Akar Kuadrat Selisih Solusi Ideal</p>
-                </div>
-    
-                <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
-                    <div class="flex flex-col gap-5">
-                        <table class="text-surface min-w-full text-start text-xs font-light">
-                            <thead class="border-b border-neutral-200 font-medium">
-                                <tr>
-                                    <th scope="col" class="px-6 py-1">Alternatif</th>
-                                    <th scope="col" class="px-6 py-1">Positif</th>
-                                    <th scope="col" class="px-6 py-1">Negatif</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"] as $key => $item)
-                                    <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                                        <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
-                                        <td class="px-6 py-1">{{ number_format((float)$dataTambahan["kuadrat_selisih_solusi_ideal"][$key]["positif"], 4, '.', '') }}</td>
-                                        <td class="px-6 py-1">{{ number_format((float)$dataTambahan["kuadrat_selisih_solusi_ideal"][$key]["negatif"], 4, '.', '') }}</td>
+            <div class="flex flex-col gap-5 bg-white w-full">
+                <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full">
+                    <div class="flex gap-2 p-2 py-1 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="h-6 w-6"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                        />
+                        </svg>
+                        <p class="font-semibold capitalize">Hasil Topsis Finance</p>
+                    </div>
+        
+                    <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                        <div class="flex flex-col gap-5">
+                            <table class="text-surface min-w-full text-start text-xs font-light">
+                                <thead class="border-b border-neutral-200 font-medium">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-1">Alternatif</th>
+                                        <th scope="col" class="px-6 py-1">Nilai Borda</th>
+                                        <th scope="col" class="px-6 py-1">Rangking</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($dataTopsis["finance"] as $key => $item)
+                                    @if ($item["rank"] == 1)
+                                        <tr class="border-b border-neutral-200 text-center bg-green-100 hover:bg-green-100 font-bold">
+                                    @else
+                                        <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                    @endif
+                                            <td class="px-6 py-1">{{ $item["nama_alternatif"] }}</td>
+                                            <td class="px-6 py-1">{{ number_format((float)$item["nilai_preferensi"], 4, '.', '') }}</td>
+                                            <td class="px-6 py-1">{{ $item["rank"] }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-5 bg-white w-full">
+                <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full">
+                    <div class="flex gap-2 p-2 py-1 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="h-6 w-6"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                        />
+                        </svg>
+                        <p class="font-semibold capitalize">Hasil Topsis Stakeholder</p>
+                    </div>
+        
+                    <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                        <div class="flex flex-col gap-5">
+                            <table class="text-surface min-w-full text-start text-xs font-light">
+                                <thead class="border-b border-neutral-200 font-medium">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-1">Alternatif</th>
+                                        <th scope="col" class="px-6 py-1">Nilai Borda</th>
+                                        <th scope="col" class="px-6 py-1">Rangking</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($dataTopsis["stakeholder"] as $key => $item)
+                                    @if ($item["rank"] == 1)
+                                        <tr class="border-b border-neutral-200 text-center bg-green-100 hover:bg-green-100 font-bold">
+                                    @else
+                                        <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                    @endif
+                                            <td class="px-6 py-1">{{ $item["nama_alternatif"] }}</td>
+                                            <td class="px-6 py-1">{{ number_format((float)$item["nilai_preferensi"], 4, '.', '') }}</td>
+                                            <td class="px-6 py-1">{{ $item["rank"] }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full mb-8">
-            <div class="flex gap-2 p-2 py-1 ">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="white"
-                    class="h-6 w-6"
-                >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
-                />
-                </svg>
-                <p class="font-semibold capitalize">Tabel Nilai Preferensi</p>
-            </div>
-
-            <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
-                <div class="flex flex-col gap-5">
-                    <table class="text-surface min-w-full text-start text-xs font-light">
-                        <thead class="border-b border-neutral-200 font-medium">
-                            <tr>
-                                <th scope="col" class="px-6 py-1">Alternatif</th>
-                                <th scope="col" class="px-6 py-1">Kriteria</th>
-                                <th scope="col" class="px-6 py-1">Preferensi</th>
-                                <th scope="col" class="px-6 py-1">Ranking</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($matriks["final"] as $key => $item)
-                            @if ($dataTambahan["rank"][$key] == 1)
-                                <tr class="border-b border-neutral-200 text-center bg-green-100 hover:bg-green-100 font-bold">
-                            @else
-                                <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
-                            @endif
-                                    <td class="px-6 py-1">{{ $item["nama_alternatif"] }}</td>
-                                    <td class="px-6 py-1">
-                                        @foreach ($dataTambahan["penilaianName"][$key]["penilaianName"] as $name)
-                                            <p class="text-left">{{$name->nama_kriteria}} ({{ $name->subkriteria }})</p>
+        @else
+            {{-- Table --}}
+            <div class="flex flex-col gap-5 bg-white">
+                <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
+                    <div class="flex gap-2 p-2 py-1 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="h-6 w-6"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                        />
+                        </svg>
+                        <p class="font-semibold capitalize">Matriks Keputusan</p>
+                    </div>
+        
+                    <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                        <div class="flex flex-col gap-5">
+                            <table class="text-surface min-w-full text-start text-xs font-light">
+                                <thead class="border-b border-neutral-200 font-medium">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-1">Alternatif</th>
+                                        @foreach ($matriks["matriks_nilai_alternatif"][0]["penilaian"] as $item)
+                                            <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
                                         @endforeach
-                                    </td>
-                                    <td class="px-6 py-1">{{ number_format((float)$dataTambahan["nilai_preferensi"][$key], 4, '.', '') }}</td>
-                                    <td class="px-6 py-1">{{ $dataTambahan["rank"][$key] }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($matriks["matriks_nilai_alternatif"] as $item)
+                                        <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                            <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
+                                            @foreach ($item->penilaian as $penilaian)
+                                                <td class="px-6 py-1">{{ $penilaian->nilai }}</td>
+                                            @endforeach
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
+                    <div class="flex gap-2 p-2 py-1 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="h-6 w-6"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                        />
+                        </svg>
+                        <p class="font-semibold capitalize">Matriks Tabel Kuadrat</p>
+                    </div>
+        
+                    <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                        <div class="flex flex-col gap-5">
+                            <table class="text-surface min-w-full text-start text-xs font-light">
+                                <thead class="border-b border-neutral-200 font-medium">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-1">Alternatif</th>
+                                        @foreach ($matriks["matriks_normalisasi_alternatif_kuadrat"][0]["penilaian"] as $item)
+                                            <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($matriks["matriks_normalisasi_alternatif_kuadrat"] as $item)
+                                        <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                            <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
+                                            @foreach ($item->penilaian as $penilaian)
+                                                <td class="px-6 py-1">{{ $penilaian->nilai }}</td>
+                                            @endforeach
+                                        </tr>
+                                    @endforeach
+                                    <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                        <td class="px-6 py-1 font-bold">Jumlah</td>
+                                        @foreach ($dataTambahan["matriks_normalisasi_alternatif_kuadrat"] as $item)
+                                            <td class="px-6 py-1 font-bold">{{ $item }}</td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
+                    <div class="flex gap-2 p-2 py-1 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="h-6 w-6"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                        />
+                        </svg>
+                        <p class="font-semibold capitalize">Matriks Tabel Normalisasi</p>
+                    </div>
+        
+                    <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                        <div class="flex flex-col gap-5">
+                            <table class="text-surface min-w-full text-start text-xs font-light">
+                                <thead class="border-b border-neutral-200 font-medium">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-1">Alternatif</th>
+                                        @foreach ($matriks["matriks_normalisasi_alternatif_dibagi_kuadrat"][0]["penilaian"] as $item)
+                                            <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($matriks["matriks_normalisasi_alternatif_dibagi_kuadrat"] as $item)
+                                        <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                            <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
+                                            @foreach ($item->penilaian as $penilaian)
+                                                <td class="px-6 py-1">{{ number_format((float)$penilaian->nilai, 4, '.', '') }}</td>
+                                            @endforeach
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
+                    <div class="flex gap-2 p-2 py-1 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="h-6 w-6"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                        />
+                        </svg>
+                        <p class="font-semibold capitalize">Matriks Tabel Normalisasi Terbobot</p>
+                    </div>
+        
+                    <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                        <div class="flex flex-col gap-5">
+                            <table class="text-surface min-w-full text-start text-xs font-light">
+                                <thead class="border-b border-neutral-200 font-medium">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-1">Alternatif</th>
+                                        @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"][0]["penilaian"] as $item)
+                                            <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"] as $item)
+                                        <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                            <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
+                                            @foreach ($item->penilaian as $penilaian)
+                                                <td class="px-6 py-1">{{ number_format((float)$penilaian->nilai, 4, '.', '') }}</td>
+                                            @endforeach
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md">
+                    <div class="flex gap-2 p-2 py-1 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="h-6 w-6"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                        />
+                        </svg>
+                        <p class="font-semibold capitalize">Matriks Tabel Solusi Ideal</p>
+                    </div>
+        
+                    <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                        <div class="flex flex-col gap-5">
+                            <table class="text-surface min-w-full text-start text-xs font-light">
+                                <thead class="border-b border-neutral-200 font-medium">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-1">Solusi</th>
+                                        @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"][0]["penilaian"] as $item)
+                                            <th scope="col" class="px-6 py-1">{{ $item->kode }}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                        <td class="px-6 py-1">Positif</td>
+                                        @foreach ($dataTambahan["solusi_ideal_positif"] as $value)
+                                            <td class="px-6 py-1">{{ number_format((float)$value, 4, '.', '') }}</td>
+                                        @endforeach
+                                    </tr>
+                                    <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                        <td class="px-6 py-1">Negatif</td>
+                                        @foreach ($dataTambahan["solusi_ideal_negatif"] as $value)
+                                            <td class="px-6 py-1">{{ number_format((float)$value, 4, '.', '') }}</td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flex gap-5 w-full">
+                    <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full">
+                        <div class="flex gap-2 p-2 py-1 ">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="white"
+                                class="h-6 w-6"
+                            >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                            />
+                            </svg>
+                            <p class="font-semibold capitalize">Matriks Tabel Kuadrat Selisih</p>
+                        </div>
+            
+                        <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                            <div class="flex flex-col gap-5">
+                                <table class="text-surface min-w-full text-start text-xs font-light">
+                                    <thead class="border-b border-neutral-200 font-medium">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-1">Alternatif</th>
+                                            <th scope="col" class="px-6 py-1">Positif</th>
+                                            <th scope="col" class="px-6 py-1">Negatif</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"] as $key => $item)
+                                            <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                                <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
+                                                <td class="px-6 py-1">{{ number_format((float)$dataTambahan["selisih_solusi_ideal"][$key]["positif"], 4, '.', '') }}</td>
+                                                <td class="px-6 py-1">{{ number_format((float)$dataTambahan["selisih_solusi_ideal"][$key]["negatif"], 4, '.', '') }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full">
+                        <div class="flex gap-2 p-2 py-1 ">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="white"
+                                class="h-6 w-6"
+                            >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                            />
+                            </svg>
+                            <p class="font-semibold capitalize">Matriks Tabel Akar Kuadrat Selisih Solusi Ideal</p>
+                        </div>
+            
+                        <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                            <div class="flex flex-col gap-5">
+                                <table class="text-surface min-w-full text-start text-xs font-light">
+                                    <thead class="border-b border-neutral-200 font-medium">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-1">Alternatif</th>
+                                            <th scope="col" class="px-6 py-1">Positif</th>
+                                            <th scope="col" class="px-6 py-1">Negatif</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($matriks["matriks_normalisasi_alternatif_terbobot"] as $key => $item)
+                                            <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                                <td class="px-6 py-1">{{ $item->nama_alternatif }}</td>
+                                                <td class="px-6 py-1">{{ number_format((float)$dataTambahan["kuadrat_selisih_solusi_ideal"][$key]["positif"], 4, '.', '') }}</td>
+                                                <td class="px-6 py-1">{{ number_format((float)$dataTambahan["kuadrat_selisih_solusi_ideal"][$key]["negatif"], 4, '.', '') }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flex flex-col gap-1 justify-between text-white bg-secondary rounded-md w-full mb-8">
+                    <div class="flex gap-2 p-2 py-1 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="white"
+                            class="h-6 w-6"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                        />
+                        </svg>
+                        <p class="font-semibold capitalize">Tabel Nilai Preferensi</p>
+                    </div>
+        
+                    <div class="flex flex-col gap-5 bg-white text-black border border-b-0">
+                        <div class="flex flex-col gap-5">
+                            <table class="text-surface min-w-full text-start text-xs font-light">
+                                <thead class="border-b border-neutral-200 font-medium">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-1">Alternatif</th>
+                                        <th scope="col" class="px-6 py-1">Kriteria</th>
+                                        <th scope="col" class="px-6 py-1">Preferensi</th>
+                                        <th scope="col" class="px-6 py-1">Ranking</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($matriks["final"] as $key => $item)
+                                    @if ($dataTambahan["rank"][$key] == 1)
+                                        <tr class="border-b border-neutral-200 text-center bg-green-100 hover:bg-green-100 font-bold">
+                                    @else
+                                        <tr class="border-b border-neutral-200 text-center hover:bg-gray-100">
+                                    @endif
+                                            <td class="px-6 py-1">{{ $item["nama_alternatif"] }}</td>
+                                            <td class="px-6 py-1">
+                                                @foreach ($dataTambahan["penilaianName"][$key]["penilaianName"] as $name)
+                                                    <p class="text-left">{{$name->nama_kriteria}} ({{ $name->subkriteria }})</p>
+                                                @endforeach
+                                            </td>
+                                            <td class="px-6 py-1">{{ number_format((float)$dataTambahan["nilai_preferensi"][$key], 4, '.', '') }}</td>
+                                            <td class="px-6 py-1">{{ $dataTambahan["rank"][$key] }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        @endif
     @endif
 </div>
     

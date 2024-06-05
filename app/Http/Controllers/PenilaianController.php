@@ -408,19 +408,30 @@ class PenilaianController extends Controller
             return view('penilaian.hasilperhitungan', ['allgreen' => $allgreen])->withErrors(['error' => 'Data penilaian belum lengkap']);
         }
 
-        try {
-            $result = $this->getPenilaianTopsis($role);
+        $dataTopsis = [];
 
-            $matriks = $result['matriks'];
-            $matriks["final"] = $matriks["matriks_normalisasi_alternatif_terbobot"]->toArray();
-            $dataTambahan = $result['dataTambahan'];
-            $dataTambahan['penilaianName'] = $dataTambahan["penilaianName"]->toArray();
-            array_multisort($dataTambahan['rank'], $dataTambahan["nilai_preferensi"], $dataTambahan["penilaianName"], $matriks["final"]);
-        } catch (\Throwable $th) {
-            return view('penilaian.hasilperhitungan', ['allgreen' => false])->withErrors(['error' => 'Data penilaian belum lengkap']);
+        if ($role == 'admin') {
+            $dataTopsis['marketing'] = $this->getHasilTopsis('marketing');
+            $dataTopsis['finance'] = $this->getHasilTopsis('finance');
+            $dataTopsis['stakeholder'] = $this->getHasilTopsis('stakeholder');
+
+            // dd($dataAdmin);
+            return view('penilaian.hasilperhitungan', ['dataTopsis' => $dataTopsis, 'allgreen' => $allgreen]);
+        }else{
+            try {
+                $result = $this->getPenilaianTopsis($role);
+    
+                $matriks = $result['matriks'];
+                $matriks["final"] = $matriks["matriks_normalisasi_alternatif_terbobot"]->toArray();
+                $dataTambahan = $result['dataTambahan'];
+                $dataTambahan['penilaianName'] = $dataTambahan["penilaianName"]->toArray();
+                array_multisort($dataTambahan['rank'], $dataTambahan["nilai_preferensi"], $dataTambahan["penilaianName"], $matriks["final"]);
+            } catch (\Throwable $th) {
+                return view('penilaian.hasilperhitungan', ['allgreen' => false])->withErrors(['error' => 'Data penilaian belum lengkap']);
+            }
+            return view('penilaian.hasilperhitungan', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'allgreen' => $allgreen]);
         }
         
-        return view('penilaian.hasilperhitungan', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'allgreen' => $allgreen]);
     }
 
     public function hasilAkhir($role) {
@@ -461,16 +472,35 @@ class PenilaianController extends Controller
     }
 
     public function exportTopsis($role) {
-        $result = $this->getPenilaianTopsis($role);
+        if (Auth::user()->role == 'admin'){
+            $final = [];
+            foreach (["marketing", "finance", "stakeholder"] as $role) {
+                $result = $this->getPenilaianTopsis($role);
+                $data = $result['matriks'];
+                $data["final"] = $data["matriks_normalisasi_alternatif_terbobot"]->toArray();
+                $data["dataTambahan"] = $result['dataTambahan'];
+                $data["dataTambahan"]["penilaianName"] = $data["dataTambahan"]["penilaianName"]->toArray();
+                array_multisort($data['dataTambahan']['rank'], $data['dataTambahan']['nilai_preferensi'], $data['dataTambahan']['penilaianName'], $data["final"]);
+                $data["role"] = $role;
+                $final[$role] = $data;
+            }
 
-        $matriks = $result['matriks'];
-        $matriks["final"] = $matriks["matriks_normalisasi_alternatif_terbobot"]->toArray();
-        $dataTambahan = $result['dataTambahan'];
-        $dataTambahan['penilaianName'] = $dataTambahan["penilaianName"]->toArray();
-        array_multisort($dataTambahan['rank'], $dataTambahan["nilai_preferensi"], $dataTambahan["penilaianName"], $matriks["final"]);
+            
+            $pdf = Pdf::loadView('pdf.topsisAdmin', ['data' => $final, 'now' => Carbon::now()])->setPaper('a4');
+            return $pdf->download('topsis_admin.pdf');
+        }else{
+            $result = $this->getPenilaianTopsis($role);
+    
+            $matriks = $result['matriks'];
+            $matriks["final"] = $matriks["matriks_normalisasi_alternatif_terbobot"]->toArray();
+            $dataTambahan = $result['dataTambahan'];
+            $dataTambahan['penilaianName'] = $dataTambahan["penilaianName"]->toArray();
+            array_multisort($dataTambahan['rank'], $dataTambahan["nilai_preferensi"], $dataTambahan["penilaianName"], $matriks["final"]);
+    
+            $pdf = Pdf::loadView('pdf.topsis', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'now' => Carbon::now(), 'role' => $role])->setPaper('a4');
+            return $pdf->download('topsis.pdf');
+        }
 
-        $pdf = Pdf::loadView('pdf.topsis', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'now' => Carbon::now(), 'role' => $role])->setPaper('a4');
-        return $pdf->download('topsis.pdf');
     }
 
     public function exportBorda($role) {
