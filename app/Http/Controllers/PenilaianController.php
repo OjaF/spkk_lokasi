@@ -412,8 +412,13 @@ class PenilaianController extends Controller
 
         if ($role == 'admin') {
             $dataTopsis['marketing'] = $this->getHasilTopsis('marketing');
+            array_multisort(array_column($dataTopsis['marketing'], 'rank'), SORT_ASC, $dataTopsis['marketing']);
+
             $dataTopsis['finance'] = $this->getHasilTopsis('finance');
+            array_multisort(array_column($dataTopsis['finance'], 'rank'), SORT_ASC, $dataTopsis['finance']);
+
             $dataTopsis['stakeholder'] = $this->getHasilTopsis('stakeholder');
+            array_multisort(array_column($dataTopsis['stakeholder'], 'rank'), SORT_ASC, $dataTopsis['stakeholder']);
 
             // dd($dataAdmin);
             return view('penilaian.hasilperhitungan', ['dataTopsis' => $dataTopsis, 'allgreen' => $allgreen]);
