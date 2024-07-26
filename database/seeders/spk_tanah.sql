@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 15, 2024 at 09:35 PM
+-- Generation Time: Jul 25, 2024 at 03:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,7 +44,7 @@ CREATE TABLE `alternatifs` (
 --
 
 INSERT INTO `alternatifs` (`id`, `kode`, `nama_alternatif`, `keterangan`, `marketing`, `finance`, `stakeholder`, `created_at`, `updated_at`) VALUES
-(1, 'A1', 'Cadek', NULL, 1, 1, 1, '2024-05-13 12:52:40', '2024-05-15 11:39:44'),
+(1, 'A1', 'Cadek', 'Cadek2', 1, 1, 1, '2024-05-13 12:52:40', '2024-06-04 03:09:56'),
 (3, 'A2', 'Baet', NULL, 1, 1, 1, '2024-05-13 12:59:04', '2024-05-14 03:39:17'),
 (4, 'A3', 'Alue Naga', NULL, 1, 1, 1, '2024-05-13 12:59:11', '2024-05-14 03:39:45'),
 (5, 'A4', 'Lampeudaya', NULL, 1, 1, 1, '2024-05-13 12:59:16', '2024-05-14 03:40:12'),
@@ -491,7 +491,11 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('8Q806uLIqMdeOAm1I9LBOwuYsdLXC9Dy8ODFYTw8', 1, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo0OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo1MjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3BlbmlsYWlhbi9oYXNpbGFraGlyL21hcmtldGluZyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NjoiX3Rva2VuIjtzOjQwOiJQMUkwVEdyMHR4U3l6UXdvbkdabFdoeUZWbFNRRzFTZmRhT2JGdGxJIjtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1715801634);
+('CZv1Gc0L8KXfb2vUEkxcw7HM3pkpB3YshpcDelDd', 4, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTo0OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NjoiX3Rva2VuIjtzOjQwOiJQbEFTak1Vb2FwZ2ZDTm1STDg5NU83aU1OazhSSkpQWHRtSko2YVpvIjtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo0O30=', 1721914745),
+('HJfSu6277pItocVJof7DMHfBAVRgnvSMi0STABtM', 4, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicGRaVGJaRTFkd3ZLalpuc1NJZm0ybkdQT2ZjczM0a0tlb3RMOGw5VyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Njg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZW5pbGFpYW4vaGFzaWxwZXJoaXR1bmdhbi9hZG1pbi9leHBvcnQvdG9wc2lzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6NDt9', 1717573795),
+('Pua8YYpl3rdFrgkphIiDHdfrb4nlO9DXyFI5MH1z', NULL, '127.0.0.1', 'Symfony', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSW1rMmQ3WHVNZHFwOFozYVJZeXdhTGtvQWFHN0NHNlpCMFIyMThCMCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTY6Imh0dHA6Ly9sb2NhbGhvc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1721914142),
+('rBSocw9ZxOxRoyqF1ddj14dZJbn1p6Ua7rIahool', 1, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTo0OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozMzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3N1YmtyaXRlcmlhIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2OiJfdG9rZW4iO3M6NDA6ImgyWU0wQVNIUnBBNXhPQTFjYUJFZ3dlRHZkNmlsbkhKVURVT2w0bHkiO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1717823442),
+('uX78JobVIdhS1MoSSXsqeu1m9UAlXYJFKWWV8yJD', 4, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTo0OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo2ODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3BlbmlsYWlhbi9oYXNpbHBlcmhpdHVuZ2FuL2FkbWluL2V4cG9ydC90b3BzaXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoiUElyYkpncmhtbzdwdDRNTnhMMDlweHo5eVpheTI0MFU0MEN5Qk1jSyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6NDt9', 1717555204);
 
 -- --------------------------------------------------------
 
@@ -637,7 +641,7 @@ INSERT INTO `users` (`id`, `name`, `username`, `role`, `password`, `remember_tok
 (1, 'Marketing', 'marketing', 'marketing', '$2y$12$HrFN7/W.ubgZvVkZUMnHcer53IRQpvmJdUoaNbf5GFe.uxuIUKyRm', NULL, '2024-05-14 02:50:18', '2024-05-15 10:59:25'),
 (2, 'Finance', 'finance', 'finance', '$2y$12$twamFSA6z26WqFmqPvlJlugqonxJdYCGzRBW4DMWD5M2TCGX0dGc6', NULL, '2024-05-14 02:50:18', '2024-05-14 02:50:18'),
 (3, 'Stakeholder', 'stakeholder', 'stakeholder', '$2y$12$KPHpWnjHhgqu0pjji8atceKTLlY9jDN/nOCN8irZGHOqnHIx3RQ0G', NULL, '2024-05-14 02:50:18', '2024-05-14 02:50:18'),
-(4, 'Admin', 'admin', 'admin', '$2y$12$KPHpWnjHhgqu0pjji8atceKTLlY9jDN/nOCN8irZGHOqnHIx3RQ0G', NULL, '2024-05-14 02:50:18', '2024-05-14 02:50:18');
+(4, 'Admin', 'admin', 'admin', '$2y$12$MwIhe80nUDLIeTO4rXZdHutdq3qLNdaSIytvyxuRyjvb5CCES/uEi', NULL, '2024-05-14 02:50:18', '2024-06-04 01:38:32');
 
 --
 -- Indexes for dumped tables
@@ -776,7 +780,7 @@ ALTER TABLE `sub_kriterias`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
