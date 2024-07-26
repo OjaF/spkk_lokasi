@@ -3,8 +3,6 @@
 namespace Tests\Unit;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Tests\TestCase;
 use App\Models\User;
 
