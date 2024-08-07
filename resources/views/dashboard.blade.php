@@ -193,10 +193,10 @@
                     @endif
                 </div>
                 <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
-                <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
 
                 <script>
                   var data = @json($rank);
+                  console.log(data);
                   window.addEventListener('load', () => {
                     // Apex Horizontal Bar Chart
                     (function () {

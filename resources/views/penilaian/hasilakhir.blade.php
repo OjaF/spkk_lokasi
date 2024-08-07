@@ -149,6 +149,142 @@
                 </div>
             </div>
         </div>
+
+        <div>
+            <div id="hs-vertical-bar-chart" class="w-full h-full text-black"></div>
+        </div>
+
+        <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
+
+        <script>
+            var data = @json($grafik);
+            // console.log(data);
+            window.addEventListener('load', () => {
+              // Apex Horizontal Bar Chart
+              (function () {
+                buildChart('#hs-vertical-bar-chart', (mode) => ({
+                  chart: {
+                    type: 'bar',
+                    height: 350,
+                  },
+                  series: [
+                    {
+                      name: 'Skor Borda',
+                      data: data.skor_borda
+                    }
+                  ],
+                  plotOptions: {
+                    bar: {
+                      horizontal: false,
+                      columnWidth: '64px',
+                      borderRadius: 0,
+                      dataLabels: {
+                        position: 'top'
+                      }
+                    },
+                  },
+                  legend: {
+                    show: false
+                  },
+                  dataLabels: {
+                    enabled: false,
+                    formatter: function(val) {
+                        return  val.toFixed(4);
+                    },  
+                    offsetX: 0,
+                    style: {
+                      colors: ['#000000']
+                    }
+                  },
+                  stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                  },
+                  xaxis: {
+                    categories: data.nama_alternatif,
+                    crosshairs: {
+                      show: true
+                    },
+                    labels: {
+                      style: {
+                        colors: '#9ca3af',
+                        fontSize: '13px',
+                        fontFamily: 'Inter, ui-sans-serif',
+                        fontWeight: 0
+                      },
+                      offsetX: -2,
+                      formatter: (value) => value >= 1000 ? `${value / 1000}k` : value
+                    }
+                  },
+                  yaxis: {
+                    crosshairs: {
+                      show: true
+                    },
+                    labels: {
+                      align: 'left',
+                      minWidth: 0,
+                      maxWidth: 160,
+                      style: {
+                        colors: '#9ca3af',
+                        fontSize: '13px',
+                        fontFamily: 'Inter, ui-sans-serif',
+                        fontWeight: 400
+                      },
+                      offsetX: 0,
+                      formatter: (title) => title
+                    }
+                  },
+                  states: {
+                    hover: {
+                      filter: {
+                        type: 'darken',
+                        value: 0.9
+                      }
+                    }
+                  },
+                }), {
+                  colors: ['#4E6441'],
+                  xaxis: {
+                    labels: {
+                      style: {
+                        colors: '#000000',
+                      }
+                    }
+                  },
+                  yaxis: {
+                    labels: {
+                      style: {
+                        colors: '#000000'
+                      }
+                    }
+                  },
+                  grid: {
+                    borderColor: '#e5e7eb'
+                  }
+                }, {
+                  colors: ['#4E6441'],
+                  xaxis: {
+                    labels: {
+                      style: {
+                        colors: '#4E6441',
+                      }
+                    }
+                  },
+                  yaxis: {
+                    labels: {
+                      style: {
+                        colors: '#4E6441'
+                      }
+                    }
+                  },
+                  grid: {
+                    borderColor: '#4E6441'
+                  }
+                });
+              })();
+            });
+          </script>
     </div>
     
     @if (Auth::user()->role == 'admin')

@@ -400,9 +400,9 @@
                 @yield('confirm_modal_content-2')
             </div>
         </div>
-        <script src="js/flowbite.min.js"></script>
-        <script src="js/preline.js"></script>
-        <script src="js/lodash.js"></script>
-        <script src="js/apexcharts.js"></script>
+        <script src="{{ URL::asset('js/flowbite.min.js') }}"></script>
+        <script src="{{ URL::asset('js/preline.js') }}"></script>
+        <script src="{{ URL::asset('js/lodash.js') }}"></script>
+        <script src="{{ URL::asset('js/apexcharts.js') }}"></script>
     </body>
 </html>

@@ -469,11 +469,27 @@ class PenilaianController extends Controller
             $dataTopsis['marketing'] = $this->getHasilTopsis('marketing');
             $dataTopsis['finance'] = $this->getHasilTopsis('finance');
             $dataTopsis['stakeholder'] = $this->getHasilTopsis('stakeholder');
+
+            $nama = [];
+            $rank = [];
+            $skor = [];
+            foreach ($hasil as $key => $value) {
+                $nama[] = $value->nama_alternatif;
+                $rank[] = $value->rank_borda;
+                $skor[] = $value->nilai_borda;
+            }
+
+            array_multisort($rank, $nama, $skor);
+
+            $grafik = [];
+            $grafik['nama_alternatif'] = $nama;
+            $grafik['rank_borda'] = $rank;
+            $grafik['skor_borda'] = $skor;
         } catch (\Throwable $th) {
             return view('penilaian.hasilperhitungan', ['allgreen' => false])->withErrors(['error' => 'Data penilaian belum lengkap']);
         }
 
-        return view('penilaian.hasilakhir', ['allgreen' => $allgreen, 'hasil' => $hasil, 'hasil_sort' => $hasil_sorted ,'dataTopsis' => $dataTopsis]);
+        return view('penilaian.hasilakhir', ['allgreen' => $allgreen, 'hasil' => $hasil, 'hasil_sort' => $hasil_sorted ,'dataTopsis' => $dataTopsis, 'grafik' => $grafik]);
     }
 
     public function exportTopsis($role) {
