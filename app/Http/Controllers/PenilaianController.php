@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePenilaianRequest;
-use App\Http\Requests\UpdatePenilaianRequest;
 use App\Models\Penilaian;
 use App\Models\Alternatif;
 use Illuminate\Http\Request;
@@ -138,7 +137,7 @@ class PenilaianController extends Controller
         foreach ($dataAlternatif as $key => $alternatif) {
             $data = DB::table('penilaians')
                     ->leftJoin('kriterias', 'penilaians.id_kriteria', '=', 'kriterias.id')
-                    ->where('id_alternatif', $alternatif->id)->where('penilaians.role', Auth::user()->role)->get(["id_kriteria","nama_kriteria", "nilai"]);
+                    ->where('id_alternatif', $alternatif->id)->where('penilaians.role', $role)->get(["id_kriteria","nama_kriteria", "nilai"]);
 
             foreach ($data as $penilaian) {
                 $datasubkriteria = DB::table('sub_kriterias')
@@ -434,6 +433,7 @@ class PenilaianController extends Controller
             } catch (\Throwable $th) {
                 return view('penilaian.hasilperhitungan', ['allgreen' => false])->withErrors(['error' => 'Data penilaian belum lengkap']);
             }
+            // dd($result);
             return view('penilaian.hasilperhitungan', ['matriks' => $matriks, 'dataTambahan' => $dataTambahan, 'allgreen' => $allgreen]);
         }
         
