@@ -463,7 +463,7 @@ class PenilaianController extends Controller
 
         try {
             $hasil = $this->getPenilaianBorda();
-            dd($hasil);
+            // dd($hasil);
             $hasil_sorted = $hasil->sortBy('rank_borda');
 
             $dataTopsis = [];
