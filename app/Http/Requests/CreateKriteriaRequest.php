@@ -23,7 +23,7 @@ class CreateKriteriaRequest extends FormRequest
     {
         return [
             'nama' => 'required|string',
-            'bobot' => 'required|numeric|between:0,1',
+            'bobot' => 'required|numeric|between:0,100',
             'role' => 'required|string',
             'atribut' => 'required|string|in:cost,benefit',
             'kode' => 'required|string',

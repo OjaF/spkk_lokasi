@@ -333,7 +333,7 @@
                                 name="bobot"
                                 id="bobot"
                                 class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
-                                placeholder="Bobot"
+                                placeholder="0 - 100"
                                 required
                             />
                         </div>
@@ -431,7 +431,7 @@
                                 name="bobot"
                                 id="edit_bobot_kriteria"
                                 class="rounded-md border border-primary p-1 placeholder:text-sm placeholder:font-thin"
-                                placeholder="Bobot"
+                                placeholder="0 - 100"
                                 required
                             />
                         </div>
